@@ -6,11 +6,11 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
-  // For a project page (username.github.io/project-name):
-  // If your repository is named "lyeswanthp.github.io", and it's a user site,
-  // you should use empty strings for both:
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '' : '',
+  // For a user/organization site (username.github.io), use empty strings
+  assetPrefix: '',
+  basePath: '',
+  // This ensures links work properly with GitHub Pages
+  trailingSlash: true
 }
 
 module.exports = nextConfig
