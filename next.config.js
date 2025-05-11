@@ -6,8 +6,8 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/{repository-name}' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/{repository-name}' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/{lyeswanthp.github.io}' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/{lyeswanthp.github.io}' : '',
 }
 
 module.exports = nextConfig
