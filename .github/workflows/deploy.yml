@@ -22,9 +22,7 @@ jobs:
         
       - name: Build
         run: npm run build
-        
-      - name: Export static files
-        run: npm run export
+        # The export is now handled by the "output: 'export'" in next.config.js
         
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
