@@ -3,7 +3,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import AnimatedText from './ui/AnimatedText';
 import { FaGraduationCap, FaCode, FaLaptopCode } from 'react-icons/fa';
-import { SiMachinelearnin } from 'react-icons/si';
+import { SiPython } from 'react-icons/si';  // or any other suitable icon
 
 export default function About() {
   const controls = useAnimation();
@@ -131,7 +131,7 @@ class DeepTransformer(nn.Module):
                     transition={{ delay: 0.6, duration: 0.7 }}
                     className="w-24 h-24 rounded-full border-2 border-primary-500 flex items-center justify-center bg-dark-800 mb-4 ml-12 shadow-lg shadow-primary-500/20"
                   >
-                    <SiMachinelearnin className="text-primary-400 text-4xl" />
+                    <SiPython className="text-primary-400 text-4xl" />
                   </motion.div>
                   <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
