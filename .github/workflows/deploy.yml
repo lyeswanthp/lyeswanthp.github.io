@@ -1,56 +1,69 @@
-name: Debug and Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
           
       - name: Install dependencies
-        run: |
-          npm install
-          npm list --depth=0  # List installed packages
-          
-      - name: Check directory structure before build
-        run: ls -la
+        run: npm ci || npm install
         
-      - name: Build with verbose output
-        run: |
-          npm run build
-          echo "Build completed, checking output directory:"
-          ls -la
-          echo "Checking if out directory exists:"
-          ls -la out || echo "out directory does not exist"
+      - name: List installed packages
+        run: npm list --depth=0
         
-      - name: Debug Next.js configuration
+      - name: Check next.config.js
         run: cat next.config.js
         
+      - name: Build project
+        run: npm run build
+        
+      - name: Verify build output
+        run: |
+          echo "Checking for output directory:"
+          ls -la
+          if [ -d "out" ]; then
+            echo "✅ 'out' directory exists"
+            echo "Contents of 'out' directory:"
+            ls -la out
+          else
+            echo "❌ 'out' directory does not exist!"
+            echo "Current directory contents:"
+            ls -la
+            exit 1
+          fi
+        
+      - name: Create .nojekyll file
+        run: touch out/.nojekyll
+        
       - name: Deploy to GitHub Pages
-        if: success()
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: out
           branch: gh-pages
-      
-      - name: Add .nojekyll file
-        if: success()
-        run: touch ./out/.nojekyll || echo "Could not create .nojekyll file"
-
-      - name: Clean install
+          clean: true  # Automatically remove deleted files from the deploy branch
+          
+      - name: Print deployment status
         run: |
-          rm -rf node_modules
-          rm -f package-lock.json
-          npm install
+          echo "🚀 Deployment complete!"
+          echo "Please check your repository settings to ensure GitHub Pages is configured to deploy from the gh-pages branch."
