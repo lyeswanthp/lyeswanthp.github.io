@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -6,10 +5,8 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
-  // Important: Define the correct asset prefix for GitHub Pages
-  assetPrefix: '/lyeswanthp.github.io/', // Replace with your actual repo name
-  basePath: '/lyeswanthp.github.io', // Replace with your actual repo name
+  // For username.github.io repos, these should be empty:
+  assetPrefix: '',
+  basePath: '',
   trailingSlash: true
 }
-
-module.exports = nextConfig
