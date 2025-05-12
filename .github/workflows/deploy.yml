@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Debug and Deploy to GitHub Pages
 
 on:
   push:
@@ -20,18 +20,37 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: npm install  # Changed from npm ci to npm install
+        run: |
+          npm install
+          npm list --depth=0  # List installed packages
+          
+      - name: Check directory structure before build
+        run: ls -la
         
-      - name: Build
-        run: npm run build
+      - name: Build with verbose output
+        run: |
+          npm run build
+          echo "Build completed, checking output directory:"
+          ls -la
+          echo "Checking if out directory exists:"
+          ls -la out || echo "out directory does not exist"
+        
+      - name: Debug Next.js configuration
+        run: cat next.config.js
         
       - name: Deploy to GitHub Pages
+        if: success()
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: out
           branch: gh-pages
       
-      - name: Build
+      - name: Add .nojekyll file
+        if: success()
+        run: touch ./out/.nojekyll || echo "Could not create .nojekyll file"
+
+      - name: Clean install
         run: |
-          npm run build
-          touch out/.nojekyll
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm install

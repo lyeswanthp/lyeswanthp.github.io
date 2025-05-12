@@ -5,11 +5,8 @@ const nextConfig = {
     domains: ['github.com', 'raw.githubusercontent.com'],
     unoptimized: true,
   },
-  output: 'export',
-  // For a username.github.io repository, these should be empty:
-  assetPrefix: '',
-  basePath: '',
-  trailingSlash: true
+  output: 'export', // This is crucial for static site generation
+  trailingSlash: true,
 }
 
 module.exports = nextConfig
