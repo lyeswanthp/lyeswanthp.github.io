@@ -30,3 +30,6 @@ jobs:
         with:
           folder: out
           branch: gh-pages
+      
+      - name: Add .nojekyll file
+        run: touch ./out/.nojekyll

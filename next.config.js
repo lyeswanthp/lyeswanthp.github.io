@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const repoName = 'lyeswanthp.github.io'; // Replace with your GitHub repository name
-
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -8,8 +6,9 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
-  assetPrefix: process.env.NODE_ENV === 'production' ? `/${repoName}/` : '',
-  basePath: process.env.NODE_ENV === 'production' ? `/${repoName}` : '',
+  // Important: Define the correct asset prefix for GitHub Pages
+  assetPrefix: '/lyeswanthp.github.io/', // Replace with your actual repo name
+  basePath: '/lyeswanthp.github.io', // Replace with your actual repo name
   trailingSlash: true
 }
 

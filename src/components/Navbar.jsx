@@ -35,11 +35,11 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/#about" className="text-gray-300 hover:text-primary-400 transition">About</Link>
-          <Link href="/#experience" className="text-gray-300 hover:text-primary-400 transition">Experience</Link>
-          <Link href="/#projects" className="text-gray-300 hover:text-primary-400 transition">Projects</Link>
-          <Link href="/#skills" className="text-gray-300 hover:text-primary-400 transition">Skills</Link>
-          <Link href="/#contact" className="text-gray-300 hover:text-primary-400 transition">Contact</Link>
+          <Link href="/lyeswanthp.github.io/#about" className="text-gray-300 hover:text-primary-400 transition">About</Link>
+          <Link href="/lyeswanthp.github.io/#experience" className="text-gray-300 hover:text-primary-400 transition">Experience</Link>
+          <Link href="/lyeswanthp.github.io/#projects" className="text-gray-300 hover:text-primary-400 transition">Projects</Link>
+          <Link href="/lyeswanthp.github.io/#skills" className="text-gray-300 hover:text-primary-400 transition">Skills</Link>
+          <Link href="/lyeswanthp.github.io/#contact" className="text-gray-300 hover:text-primary-400 transition">Contact</Link>
         </nav>
 
         {/* Social Links */}
@@ -94,11 +94,11 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-4 py-3 bg-dark-700/90 backdrop-blur-md shadow-lg">
           <nav className="flex flex-col space-y-4">
-            <Link href="/#about" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>About</Link>
-            <Link href="/#experience" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Experience</Link>
-            <Link href="/#projects" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Projects</Link>
-            <Link href="/#skills" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Skills</Link>
-            <Link href="/#contact" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+            <Link href="/lyeswanthp.github.io/#about" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>About</Link>
+            <Link href="/lyeswanthp.github.io/#experience" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Experience</Link>
+            <Link href="/lyeswanthp.github.io/#projects" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Projects</Link>
+            <Link href="/lyeswanthp.github.io/#skills" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Skills</Link>
+            <Link href="/lyeswanthp.github.io/#contact" className="text-gray-300 hover:text-primary-400 transition" onClick={() => setIsMenuOpen(false)}>Contact</Link>
             
             <div className="flex items-center space-x-4 pt-2">
               <a href="https://github.com/lyeswanthp" target="_blank" rel="noopener noreferrer"
