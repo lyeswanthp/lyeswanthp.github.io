@@ -3,10 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: write
   pages: write
@@ -24,10 +22,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
-          
+          # Removed the cache option since you don't have a lock file
+
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm install
+        
+      - name: Generate package-lock.json for future caching
+        run: npm i --package-lock-only
         
       - name: List installed packages
         run: npm list --depth=0
@@ -61,7 +62,7 @@ jobs:
         with:
           folder: out
           branch: gh-pages
-          clean: true  # Automatically remove deleted files from the deploy branch
+          clean: true
           
       - name: Print deployment status
         run: |
