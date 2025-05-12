@@ -23,51 +23,12 @@ jobs:
       - name: Build
         run: npm run build
         
-      - name: Copy 404.html
-        run: |
-          cat > ./out/404.html << 'EOL'
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <meta charset="utf-8">
-              <title>Redirecting...</title>
-              <script>
-                  // Single Page Apps for GitHub Pages
-                  // https://github.com/rafgraph/spa-github-pages
-                  var pathSegmentsToKeep = 0;
-                  var l = window.location;
-                  l.replace(
-                      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-                      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-                      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-                      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-                      l.hash
-                  );
-              </script>
-          </head>
-          <body>
-              Redirecting...
-          </body>
-          </html>
-          EOL
-          
-      - name: Add routing script to index.html
-        run: |
-          # This adds the SPA routing script to the head of index.html
-          sed -i 's/<head>/<head>\n  <script type="text\/javascript">\n    \/\/ Single Page Apps for GitHub Pages\n    (function(l) {\n      if (l.search[1] === "\/" ) {\n        var decoded = l.search.slice(1).split("\&").map(function(s) { \n          return s.replace(\/~and~\/g, "\&")\n        }).join("?");\n        window.history.replaceState(null, null,\n            l.pathname.slice(0, -1) + decoded + l.hash\n        );\n      }\n    }(window.location))\n  <\/script>/' ./out/index.html
-          
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
         
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          # For a personal GitHub Pages site, deploy to main or master branch
-          branch: main
+          branch: gh-pages  # Deploy to gh-pages branch instead of main
           folder: out
-          # This puts files in the root directory
           clean: true
-          # Don't remove these files
-          clean-exclude: |
-            .github
-            .git
