@@ -31,5 +31,7 @@ jobs:
           folder: out
           branch: gh-pages
       
-      - name: Add .nojekyll file
-        run: touch ./out/.nojekyll
+      - name: Build
+        run: |
+          npm run build
+          touch out/.nojekyll

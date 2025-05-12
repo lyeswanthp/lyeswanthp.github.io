@@ -1,3 +1,4 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -5,8 +6,10 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
-  // For username.github.io repos, these should be empty:
+  // For a username.github.io repository, these should be empty:
   assetPrefix: '',
   basePath: '',
   trailingSlash: true
 }
+
+module.exports = nextConfig
