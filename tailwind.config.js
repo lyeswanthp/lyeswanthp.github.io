@@ -5,10 +5,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-      },
       colors: {
         primary: {
           100: '#E6F7FF',
@@ -21,44 +17,22 @@ module.exports = {
           800: '#0050B3',
           900: '#003A8C',
         },
-        secondary: {
-          100: '#F0FFF4',
-          200: '#CCFFCC',
-          300: '#9EFFB3',
-          400: '#85F2B3',
-          500: '#52D989', // bright teal
-          600: '#13C276',
-          700: '#01A368',
-          800: '#018561',
-          900: '#016457',
-        },
+        // New deep blue theme
         dark: {
-          100: '#676778',
-          200: '#5A5A6A',
-          300: '#4D4D5C',
-          400: '#41414E',
-          500: '#343440', // dark background
-          600: '#272732',
-          700: '#1A1A24',
-          800: '#0D0D16',
-          900: '#000008',
-        },
-        accent: {
-          purple: '#8B5CF6',
-          pink: '#EC4899',
-          yellow: '#F59E0B',
-          cyan: '#06B6D4',
-        }
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+          100: '#172040',
+          200: '#121835',
+          300: '#0E142A',
+          400: '#0B1020',
+          500: '#080B15', // darker background
+          600: '#060810',
+          700: '#04060A',
+          800: '#020305',
+          900: '#010102',
         },
         glow: {
-          '0%, 100%': { boxShadow: '0 0 5px 0px rgba(64, 169, 255, 0.5)' },
-          '50%': { boxShadow: '0 0 20px 5px rgba(64, 169, 255, 0.7)' },
-        },
+          blue: '#00A3FF', // glowing blue accent
+        }
+      },
         pulse: {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0.5 },
