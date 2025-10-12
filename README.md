@@ -1,167 +1,136 @@
-# Lovely Yeswanth P - Professional Portfolio
+# Hi there, I'm Lovely Yeswanth 👋
 
-A modern, responsive portfolio website designed for AI/ML Engineer and Data Science job applications.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-lovelyyeswanth-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/lovelyyeswanth/)
+[![Google Scholar](https://img.shields.io/badge/Google%20Scholar-Publications-green?style=flat&logo=google-scholar)](https://scholar.google.com/citations?user=JMwetPIAAAAJ&hl=en)
+[![Email](https://img.shields.io/badge/Email-Lpanch2%40emory.edu-red?style=flat&logo=gmail)](mailto:Lpanch2@emory.edu)
 
-## Features
+## 🚀 About Me
 
-- **Modern Design**: Clean, professional design with gradient accents and smooth animations
-- **Fully Responsive**: Works perfectly on desktop, tablet, and mobile devices
-- **Optimized Performance**: Fast loading times with optimized assets
-- **SEO Friendly**: Proper meta tags and semantic HTML
-- **Interactive Elements**: Smooth scrolling, hover effects, and animated sections
+I'm a Master's student in Computer Science at **Emory University**, specializing in AI/ML systems that bridge research and production. My work spans foundation models, RAG architectures, and HPC infrastructure—from training models on 1M+ ECG signals to managing GPU clusters serving 150+ researchers.
 
-## Sections
+🎓 **MS in Computer Science** @ Emory University (2024-2026)
+📚 **10 peer-reviewed publications** in AI, Machine Learning, and Healthcare
+🏆 **Best Paper Award** @ OCIT 2024 | **Gold Medal** for Research Excellence 2022
+💼 **Seeking AI/ML Engineer & Data Scientist roles** starting May 2026
 
-1. **Hero Section**: Eye-catching introduction with key stats
-2. **About**: Detailed professional summary
-3. **Experience**: Timeline of professional roles with achievements
-4. **Education**: Academic background and qualifications
-5. **Projects**: Featured AI/ML projects with metrics
-6. **Publications**: Research papers and academic contributions
-7. **Skills**: Technical skills organized by category
-8. **Contact**: Multiple ways to get in touch
+## 🔬 Research & Publications
 
-## Customization Guide
+My research focuses on **multimodal AI**, **foundation models**, and **medical AI applications**. Selected publications:
 
-### 1. Update Personal Information
+- **Fusion of ECG Foundation Model Embeddings** (arXiv 2024) - Self-supervised learning on 1M+ signals
+- **ViTDehazer: Vision Transformer for Image Dehazing** (OCIT 2024) 🏆 Best Paper
+- **Hybrid ARIMA-LSTM Forecasting Model** (Springer Nature 2024)
+- **ResNet for ECG Heartbeat Classification** (SPICES 2024)
+- **Financial Fraud Detection with Class Imbalance** (OCIT 2024)
 
-**In `index.html`:**
+[📄 View all publications](https://scholar.google.com/citations?user=JMwetPIAAAAJ&hl=en)
 
-- Update the resume link in the Hero section (line 57):
-  ```html
-  <a href="YOUR_RESUME_LINK" target="_blank" class="btn btn-secondary">
-  ```
+## 💻 Technical Skills
 
-- Replace the placeholder image in the About section (line 121):
-  ```html
-  <img src="YOUR_IMAGE_URL" alt="Lovely Yeswanth Panchumarthi">
-  ```
+### Core Competencies
+- **Machine Learning & Deep Learning**: PyTorch, TensorFlow, Scikit-learn
+- **LLMs & RAG Systems**: LangChain, LlamaIndex, Hugging Face Transformers
+- **MLOps & Infrastructure**: AWS, Docker, Kubernetes, MLflow, Weights & Biases
 
-### 2. Add Your Resume
-
-Upload your resume to:
-- Google Drive (recommended for easy updates)
-- GitHub repository
-- Cloud storage service
-
-Then update the link in the Hero section.
-
-### 3. Update Publications
-
-Edit the Publications section to add your specific papers:
-- Full paper titles
-- Co-authors
-- Publication venues
-- arXiv or DOI links
-- Tags/keywords
-
-### 4. Customize Colors
-
-**In `styles.css`, update the CSS variables (lines 6-18):**
-
-```css
-:root {
-    --cream-bg: #F5F1E8;          /* Main background */
-    --gradient-start: #667EEA;     /* Primary accent color */
-    --gradient-end: #764BA2;       /* Secondary accent color */
-}
+### Programming & Tools
+```python
+languages = ["Python", "R", "SQL", "Unix/Linux"]
+frameworks = ["PyTorch", "TensorFlow", "FastAPI", "Flask"]
+ml_tools = ["Transformers", "LangChain", "NumPy", "Pandas"]
+databases = ["PostgreSQL", "MongoDB", "FAISS", "Pinecone", "Qdrant"]
+cloud = ["AWS EC2", "SageMaker", "Docker", "Kubernetes"]
 ```
 
-### 5. Update Social Links
+## 🔥 Featured Projects
 
-**In the Contact section:**
-- LinkedIn URL
-- GitHub URL
-- Google Scholar URL
-- Email address
+### [Multimodal RAG for Document Understanding](https://github.com/lyeswanthp/Multimodal_RAG_for_Document_Understanding)
+Vision-language RAG system processing complex PDFs using **ColPali** embeddings and **Qdrant** vector database, integrated with **DeepSeek Janus-Pro** for multimodal queries.
+- 📊 85% answer precision | ⚡ 450ms latency
+- 🛠️ **Tech**: ColPali, Qdrant, DeepSeek, Vision-Language Models
 
-## File Structure
+### [RAG System for Live Web Content](https://github.com/lyeswanthp/RAG_WEB_CONTENT)
+Production-ready RAG pipeline fetching and embedding live web content with hybrid search mechanism.
+- 📈 30% latency reduction | 🎯 18% accuracy improvement
+- 🛠️ **Tech**: LangChain, LlamaIndex, Hybrid Search, Real-time Processing
 
-```
-portfolio/
-│
-├── index.html          # Main HTML file
-├── styles.css          # All styling
-├── script.js           # JavaScript functionality
-└── README.md          # This file
-```
+### [MemRAG-BioQA](https://github.com/lyeswanthp/MemRAG)
+Memory-efficient RAG for biomedical question answering over 2M+ QA pairs using **BioBERT** embeddings and **FAISS** indexing.
+- ⚡ <200ms retrieval latency
+- 🛠️ **Tech**: BioBERT, FAISS, T5-Large, Healthcare AI
 
-## Technologies Used
+### [ResumeGPT](https://github.com/lyeswanthp/ResumeGPT)
+Python tool automating resume tailoring using LLMs, generating ATS-friendly PDFs.
+- 🛠️ **Tech**: LLMs, Python, PDF Generation, NLP
 
-- **HTML5**: Semantic markup
-- **CSS3**: Modern styling with CSS Grid and Flexbox
-- **JavaScript**: Vanilla JS for interactivity
-- **Google Fonts**: Space Grotesk & Inter
+### Passage Ranking with Modified Cross-Encoder
+Dual scoring mechanism using cosine similarity and logits-based probabilities with fine-tuned **RoBERTa** and **DistilBERT**.
+- 📊 21% reduction in false negatives | 9% accuracy increase
+- 🛠️ **Tech**: RoBERTa, DistilBERT, Information Retrieval
 
-## Browser Support
+## 💼 Professional Experience
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+### 🔧 HPC & Cloud Research Computing Assistant
+**Emory University** | May 2025 - Present
+- Developed automated GPU monitoring analytics for **200+ NVIDIA GPUs**, saving **$25K+** annually
+- Managed **50+ AWS EC2 instances** on OnDemand platform serving **150+ users**
+- Trained **80+ researchers** across 12 departments with **25+ documentation** resources
+- Achieved **99.5% system uptime** and **30% resource utilization improvement**
 
-## Performance Tips
+### 🧠 ML Research Assistant
+**MAIX Lab, Emory University** | Aug 2024 - Apr 2025
+- Built multimodal deep learning models for time-series signal and text data
+- Pretrained foundation models using self-supervised learning on **1M+ ECG signals**
+- Achieved **18% accuracy improvement** through model fusion strategies
+- Engineered **DDP training pipeline** for GPT-based models on **A100 GPUs**
 
-1. **Optimize Images**: Use WebP format for better compression
-2. **Add Real Photo**: Replace placeholder with professional headshot
-3. **Lazy Loading**: Images load as you scroll
-4. **Minimal Dependencies**: No heavy frameworks
+### 🤖 Prompt Engineer
+**Insignia Consultancy Solutions** | Jul 2023 - Oct 2023
+- Developed Flask web application with **ChatGPT API** integration
+- Implemented NLP keyword extraction using **TF-IDF** and tokenization
+- Built web scraper for knowledge base creation
 
-## Deployment
+### 🔬 Machine Learning Researcher
+**University of Winnipeg** | Jan 2023 - Jul 2023
+- Implemented **Tolerance-Based Soft Computing (TSC 2.0)** algorithm
+- Leveraged **XLNet** embeddings for tolerance class creation
+- Conducted comparative analysis with established ML algorithms
 
-### GitHub Pages (Recommended)
+## 📊 GitHub Stats
 
-1. Push to GitHub repository named `username.github.io`
-2. Go to Settings > Pages
-3. Select main branch as source
-4. Your site will be live at `https://username.github.io`
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=lyeswanthp&show_icons=true&theme=radical)
 
-### Netlify
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=lyeswanthp&layout=compact&theme=radical)
 
-1. Drag and drop folder to Netlify
-2. Site goes live immediately
-3. Free custom domain support
+## 🎓 Education
 
-## Important Updates to Make
+**Master of Science in Computer Science**
+Emory University, Laney Graduate School | Aug 2024 - May 2026
+*Coursework*: Deep Learning, Generative AI, Information Retrieval, Data Mining, Advanced Database Management
 
-✅ **High Priority:**
-1. Upload your professional photo
-2. Add your actual resume link
-3. Update email in contact section
-4. Verify all GitHub project links work
-5. Update publication details if needed
+**Bachelor of Science in Computer Science**
+SRM University, AP, India | Sep 2020 - Jun 2024 | GPA: 3.6/4.0
+🏆 Gold Medal for Outstanding Research Work 2022
+🏆 Best Paper Award @ OCIT 2024
 
-✅ **Medium Priority:**
-1. Add specific GPA if desired
-2. Update education achievements
-3. Add more project metrics
-4. Customize color scheme
+## 🏆 Honors & Awards
 
-✅ **Optional:**
-1. Add Google Analytics
-2. Add custom favicon
-3. Set up contact form
-4. Add blog section
+- 🥇 **Gold Medal** for Outstanding Research Work on Research Day 2022
+- 🏆 **Best Paper Award** @ OCIT 2024 Conference
+- 📚 Published **10 peer-reviewed papers** in top-tier conferences and journals
 
-## Tips for Job Applications
+## 📫 Let's Connect
 
-1. **Keep it Updated**: Regularly add new projects and experiences
-2. **Quantify Achievements**: Use specific metrics and numbers
-3. **Show Impact**: Emphasize business value and outcomes
-4. **Mobile First**: Most recruiters view on mobile
-5. **Fast Loading**: Keep it under 3 seconds load time
+I'm actively seeking **AI/ML Engineer** and **Data Scientist** opportunities starting **May 2026**. I'm particularly interested in:
+- 🤖 Building production LLM and RAG systems
+- 🔬 Bridging AI research and scalable engineering
+- ☁️ ML infrastructure and MLOps at scale
+- 🏥 Healthcare AI and multimodal systems
 
-## Contact
-
-For questions or customization help:
-- Email: Lpanch2@emory.edu
-- LinkedIn: [linkedin.com/in/lovelyyeswanth](https://www.linkedin.com/in/lovelyyeswanth/)
-- GitHub: [github.com/lyeswanthp](https://github.com/lyeswanthp)
-
-## License
-
-Feel free to use this template for your own portfolio. Attribution appreciated but not required.
+📧 Email: Lpanch2@emory.edu
+💼 LinkedIn: [linkedin.com/in/lovelyyeswanth](https://www.linkedin.com/in/lovelyyeswanth/)
+🔬 Google Scholar: [Research Profile](https://scholar.google.com/citations?user=JMwetPIAAAAJ&hl=en)
+🌐 Portfolio: [lyeswanthp.github.io](https://lyeswanthp.github.io)
 
 ---
 
-**Good luck with your job applications!** 🚀
+⭐️ From [lyeswanthp](https://github.com/lyeswanthp)
