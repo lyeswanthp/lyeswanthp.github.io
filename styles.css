@@ -407,6 +407,18 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-3px);
 }
 
+.btn-outline {
+    background: transparent;
+    color: var(--medium-text);
+    border-color: var(--medium-text);
+}
+
+.btn-outline:hover {
+    background: var(--medium-text);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
 .btn-large {
     padding: 1rem 2.5rem;
     font-size: 1.125rem;
@@ -850,6 +862,196 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-2px);
 }
 
+/* Education Section */
+.education {
+    background: var(--white);
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.education-card {
+    background: var(--cream-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+}
+
+.education-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.edu-icon {
+    font-size: 2rem;
+}
+
+.edu-date {
+    font-size: 0.875rem;
+    color: var(--gradient-start);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.education-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-text);
+}
+
+.education-card h4 {
+    font-size: 1rem;
+    color: var(--medium-text);
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+}
+
+.edu-gpa {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gradient-start);
+    margin-bottom: var(--spacing-sm);
+}
+
+.edu-details {
+    margin-top: var(--spacing-sm);
+}
+
+.edu-details p {
+    color: var(--medium-text);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+/* Publications Section */
+.publications {
+    background: var(--white);
+}
+
+.publications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.publication-card {
+    background: var(--cream-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+}
+
+.publication-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.publication-card.featured-pub {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+    border: 2px solid var(--gradient-start);
+}
+
+.pub-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--gradient-start);
+    color: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.publication-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
+}
+
+.pub-authors {
+    font-size: 0.938rem;
+    color: var(--medium-text);
+    margin-bottom: 0.25rem;
+}
+
+.pub-venue {
+    font-size: 0.875rem;
+    color: var(--light-text);
+    font-style: italic;
+    margin-bottom: var(--spacing-sm);
+}
+
+.pub-description {
+    color: var(--medium-text);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+    flex-grow: 1;
+}
+
+.pub-links {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.pub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    background: var(--white);
+    color: var(--dark-text);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.pub-link:hover {
+    background: var(--gradient-start);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.pub-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pub-tags span {
+    padding: 0.25rem 0.75rem;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: 0.813rem;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.publications-footer {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+}
+
 /* Contact Section */
 .contact {
     background: var(--cream-light);
@@ -931,6 +1133,14 @@ h1, h2, h3, h4, h5, h6 {
 
     .stat-value {
         font-size: 1.5rem;
+    }
+
+    .education-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .publication-card.featured-pub {
+        grid-column: 1;
     }
 }
 

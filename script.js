@@ -192,7 +192,9 @@ function initIntersectionObserver() {
         .about-content,
         .about-image,
         .timeline-item,
+        .education-card,
         .project-card,
+        .publication-card,
         .skill-category,
         .contact-content
     `);
