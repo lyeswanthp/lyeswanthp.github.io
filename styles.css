@@ -289,6 +289,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--spacing-sm);
 }
 
+.section-subtitle {
+    font-size: 1rem;
+    color: var(--medium-text);
+    margin-top: 0.5rem;
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -426,10 +432,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-stats {
     display: flex;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     justify-content: center;
+    flex-wrap: wrap;
     margin-top: var(--spacing-lg);
     animation: fadeIn 0.8s ease-out 1s both;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .stat {
