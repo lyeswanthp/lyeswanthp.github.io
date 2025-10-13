@@ -95,12 +95,6 @@ Dual scoring mechanism using cosine similarity and logits-based probabilities wi
 - Leveraged **XLNet** embeddings for tolerance class creation
 - Conducted comparative analysis with established ML algorithms
 
-## 📊 GitHub Stats
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=lyeswanthp&show_icons=true&theme=radical)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=lyeswanthp&layout=compact&theme=radical)
-
 ## 🎓 Education
 
 **Master of Science in Computer Science**
