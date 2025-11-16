@@ -1,7 +1,9 @@
-// Simple Portfolio JavaScript
+// Modern Portfolio JavaScript
 
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
+    initScrollEffects();
+    initSmoothScroll();
 });
 
 // Navigation
@@ -37,5 +39,56 @@ function initNavigation() {
             navLinks?.classList.remove('active');
             document.body.style.overflow = '';
         }
+    });
+}
+
+// Smooth Scroll
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Scroll Effects
+function initScrollEffects() {
+    // Fade-in animation on scroll
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe cards and sections
+    const animatedElements = document.querySelectorAll('.project-card, .publication-card, .timeline-item, .skill-category');
+
+    animatedElements.forEach((element, index) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(element);
     });
 }
