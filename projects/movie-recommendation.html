@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Movie Recommendation System | Lovely Yeswanth P</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-detail { max-width: 800px; margin: 100px auto 50px; padding: 0 1.5rem; }
+        .back-link { display: inline-block; color: #6366f1; text-decoration: none; margin-bottom: 2rem; }
+        .back-link:hover { text-decoration: underline; }
+        .project-header { margin-bottom: 3rem; }
+        .project-header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .project-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        .project-meta a { color: #1a1a1a; text-decoration: none; padding: 0.5rem 1rem; background: #f5f5f5; border-radius: 6px; }
+        .project-meta a:hover { background: #e5e5e5; }
+        .section { margin-bottom: 2.5rem; }
+        .section h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .section p, .section li { color: #666; line-height: 1.8; margin-bottom: 1rem; }
+        ul { padding-left: 1.5rem; }
+        .tech-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .tech-tag { padding: 0.5rem 1rem; background: #f5f5f5; border-radius: 6px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="project-detail">
+        <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+
+        <div class="project-header">
+            <h1>Intelligent Movie Recommendation System</h1>
+            <div class="project-meta">
+                <a href="https://github.com/lyeswanthp/Movie-Recommendation-System" target="_blank">View on GitHub →</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Overview</h2>
+            <p>
+                A dual-mode movie discovery application that employs intelligent search mechanisms to help users find films
+                matching their preferences. Users can either describe desired movies in natural language or request suggestions
+                similar to films they already enjoy. Built with both lightweight and advanced versions to suit different deployment scenarios.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Dual Search Modes:</strong> Description-based natural language search and title-based similarity matching</li>
+                <li><strong>Basic Version:</strong> Fast TF-IDF search working completely offline without internet dependencies</li>
+                <li><strong>Advanced Version:</strong> Semantic search using ChromaDB for understanding meaning beyond keywords</li>
+                <li><strong>Optional AI Explanations:</strong> Ollama integration for generating contextual recommendations</li>
+                <li><strong>Graceful Degradation:</strong> Advanced features work independently without external AI dependencies</li>
+                <li><strong>Configurable Results:</strong> Choose between 3, 5, or 10 recommendations per query</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Technical Approach</h2>
+            <p>
+                The system demonstrates thoughtful engineering by offering both lightweight and feature-rich implementations.
+                The basic version uses TF-IDF for quick keyword matching, perfect for offline scenarios and resource-constrained
+                environments. The advanced version incorporates semantic search with ChromaDB, allowing it to understand the
+                meaning and context of queries rather than just matching keywords.
+            </p>
+            <p>
+                The optional Ollama integration adds AI-generated explanations for why movies are recommended, but the system
+                is designed with fallback functionality—all core features work without Ollama, showcasing robust design principles.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Technologies Used</h2>
+            <div class="tech-list">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Flask</span>
+                <span class="tech-tag">ChromaDB</span>
+                <span class="tech-tag">TF-IDF</span>
+                <span class="tech-tag">Ollama</span>
+                <span class="tech-tag">Semantic Search</span>
+                <span class="tech-tag">NLP</span>
+                <span class="tech-tag">MovieLens Dataset</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Dataset</h2>
+            <p>
+                Utilizes the MovieLens metadata containing thousands of films with comprehensive descriptions, genres,
+                and metadata. The rich dataset enables both accurate keyword matching and semantic understanding of
+                movie characteristics.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Impact</h2>
+            <p>
+                This project showcases practical AI engineering by providing multiple deployment options—from a lightweight
+                offline version to a sophisticated semantic search system with optional AI enhancements. The architecture
+                emphasizes accessibility and robust design, making it suitable for various use cases from personal projects
+                to scalable web applications.
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Lovely Yeswanth Panchumarthi</p>
+        </div>
+    </footer>
+</body>
+</html>
