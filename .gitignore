@@ -1,5 +1,8 @@
-portfolio-new/
-backup-old-portfolio/
 .claude/
+node_modules/
+dist/
+dist-ssr/
 *.tar.gz
 *.exe
+*.log
+.DS_Store
