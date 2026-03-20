@@ -13,7 +13,7 @@ const experiences = [
     location: 'Atlanta, GA',
     accent: '#B8860B',
     description:
-      'Engineering and maintaining high-performance computing infrastructure that supports AI/ML research across the university.',
+      'Engineering and mainaining high-performance computing infrastructure that supports AI/ML research across the university.',
     highlights: [
       'Built a GPU monitoring system using Python and NVIDIA DCGM to track utilization metrics across compute nodes, streaming data to Prometheus for real-time visualization in Grafana dashboards',
       'Designed testing pipelines for AWS ParallelCluster architecture upgrades, ensuring compute nodes maintain functionality, correct user permissions, and compatibility with ML workloads',
