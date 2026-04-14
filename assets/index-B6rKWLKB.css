@@ -48,5 +48,6 @@ section{background-color:var(--bg-primary)!important}
 [data-theme="light"] .text-\[\#CD853F\/80\],.text-\[\#CD853F\/80\]{color:#8b5a2b!important}
 [data-theme="light"] .text-\[\#0d0b09\]{color:#1a1a1a!important}
 /* Theme toggle button */
-.theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-primary);border-radius:0.25rem;background:transparent;cursor:pointer;color:var(--text-secondary);transition:all .3s ease;flex-shrink:0}
-.theme-toggle:hover{color:var(--text-primary);border-color:var(--border-hover);background:var(--bg-secondary)}
+.theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-primary);border-radius:0.25rem;background:transparent;cursor:pointer;color:var(--text-primary);transition:all .3s ease;flex-shrink:0;opacity:0.8}
+.theme-toggle:hover{opacity:1;border-color:var(--border-hover);background:var(--bg-secondary)}
+.theme-toggle svg{width:18px;height:18px}
