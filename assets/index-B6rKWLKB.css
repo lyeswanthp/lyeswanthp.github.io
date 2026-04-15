@@ -37,8 +37,8 @@ section{background-color:var(--bg-primary)!important}
 .bg-white\/[0\.04]{background-color:var(--bg-tertiary)!important}
 [data-theme="light"] .hover\:bg-white\/[0\.03]:hover,.hover\:bg-white\/[0\.03]:hover{background-color:var(--bg-hover)!important}
 [data-theme="light"] .hover\:bg-white\/[0\.04]:hover,.hover\:bg-white\/[0\.04]:hover{background-color:var(--bg-hover)!important}
-/* Text colors */
-.text-white\/[90],.text-white\/[80],.text-white\/[50],.text-white\/[45],.text-white\/[40],.text-white\/[35],.text-white\/[30],.text-white\/[25],.text-white\/[20],.text-white\/[15],.text-white\/[5]{color:var(--text-primary)!important}
+/* Text colors - all white/X classes use theme text color */
+.text-white\/90,.text-white\/80,.text-white\/50,.text-white\/45,.text-white\/40,.text-white\/35,.text-white\/30,.text-white\/25,.text-white\/20,.text-white\/15,.text-white\/5{color:var(--text-primary)!important}
 /* Border colors */
 .border-white\/[0\.04],.border-white\/[0\.06],.border-white\/[0\.08]{border-color:var(--border-primary)!important}
 [data-theme="light"] .hover\:border-white\/[0\.08]:hover{border-color:var(--border-hover)!important}
