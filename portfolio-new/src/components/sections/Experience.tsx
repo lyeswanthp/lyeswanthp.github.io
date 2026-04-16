@@ -1,146 +1,235 @@
-import { motion, useInView, type Variants } from 'framer-motion';
-import { useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const bezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const stagger: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.15 } } };
-const up: Variants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: bezier } } };
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.13,
+    },
+  },
+};
 
-const experiences = [
-  {
-    title: 'HPC & Cloud Research Engineer',
-    company: 'Emory University - Research Computing',
-    period: 'May 2024 - Present',
-    location: 'Atlanta, GA',
-    accent: '#B8860B',
-    description:
-      'Engineering and mainaining high-performance computing infrastructure that supports AI/ML research across the university.',
-    highlights: [
-      'Built a GPU monitoring system using Python and NVIDIA DCGM to track utilization metrics across compute nodes, streaming data to Prometheus for real-time visualization in Grafana dashboards',
-      'Designed testing pipelines for AWS ParallelCluster architecture upgrades, ensuring compute nodes maintain functionality, correct user permissions, and compatibility with ML workloads',
-      'Automated user lifecycle management by developing Python scripts that integrate with SLURM accounting database to identify and remove inactive users based on resource usage patterns',
-      'Created alerting systems for underutilized GPU resources, helping optimize costs on high-performance compute instances',
-    ],
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: bezier,
+    },
   },
-  {
-    title: 'ML Research Assistant',
-    company: 'MAIX Lab, Emory University',
-    period: 'Aug 2024 - Present',
-    location: 'Atlanta, GA',
-    accent: '#6B8E23',
-    description:
-      'Conducting research in multimodal AI systems, foundation models for biomedical signals, and retrieval-augmented generation.',
-    highlights: [
-      'Building a multimodal foundation model that combines ECG signals with clinical text for diagnostic applications, achieving state-of-the-art performance on downstream tasks',
-      'Developed a RAG system for biomedical document understanding using PyTorch and LangChain, enabling more accurate question-answering from medical literature',
-      'Published research on biomedical question answering and ECG/PPG signal processing in peer-reviewed conferences',
-      'Built ML training pipelines on AWS and GCP with distributed data processing to handle large-scale biomedical datasets',
-    ],
-  },
-  {
-    title: 'Prompt Engineer',
-    company: 'Insignia Consultancy',
-    period: 'Jul 2023 - Oct 2023',
-    location: 'Remote',
-    accent: '#CD853F',
-    description:
-      'Designed and optimized prompts for large language models in production environments.',
-    highlights: [
-      'Engineered prompt templates for GPT-4 and Claude to improve response quality and consistency across customer-facing applications',
-      'Developed testing frameworks to evaluate prompt performance and identify edge cases in LLM behavior',
-      'Worked with product teams to refine model outputs based on user feedback and business requirements',
-    ],
-  },
-  {
-    title: 'Machine Learning Researcher',
-    company: 'University of Winnipeg',
-    period: 'Jan 2023 - Jul 2023',
-    location: 'Winnipeg, Canada',
-    accent: '#708090',
-    description:
-      'Conducted research in computer vision and deep learning for medical imaging applications.',
-    highlights: [
-      'Published research papers in medical AI focusing on diagnostic imaging and disease classification',
-      'Developed CNN-based models for automated disease detection from medical scans',
-      'Collaborated with medical professionals to ensure models aligned with clinical workflows and diagnostic standards',
-      'Contributed to open-source medical imaging datasets to support the research community',
-    ],
-  },
-];
+};
 
-export default function Experience() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+interface ExperienceItem {
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  accent: string;
+  highlights: string[];
+  bullets?: string[];
+}
+
+const ExperienceItem: React.FC<{ item: ExperienceItem; index: number }> = ({
+  item,
+  index,
+}) => {
+  return (
+    <motion.div
+      variants={fadeUp}
+      className="relative pl-8 pb-12 last:pb-0"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
+      {/* Timeline line */}
+      <div
+        className="absolute left-[7px] top-2 bottom-0 w-[2px]"
+        style={{ backgroundColor: `${item.accent}40` }}
+      />
+
+      {/* Timeline dot */}
+      <div
+        className="absolute left-0 top-1 w-4 h-4 rounded-full border-4 border-[#0d0b09]"
+        style={{ backgroundColor: item.accent }}
+      />
+
+      {/* Content */}
+      <div
+        className="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+      >
+        {/* Header */}
+        <div className="mb-4">
+          <h3
+            className="text-xl font-semibold mb-1"
+            style={{ color: item.accent }}
+          >
+            {item.role}
+          </h3>
+          <div className="flex flex-wrap items-center gap-2 text-gray-300 text-sm">
+            <span className="font-medium">{item.company}</span>
+            <span className="text-gray-600">|</span>
+            <span>{item.period}</span>
+            <span className="text-gray-600">|</span>
+            <span>{item.location}</span>
+          </div>
+        </div>
+
+        {/* Highlights */}
+        <ul className="space-y-2">
+          {item.highlights.map((highlight, idx) => (
+            <li key={idx} className="flex items-start gap-3 text-gray-300 text-sm">
+              <div
+                className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+                style={{ backgroundColor: item.accent }}
+              />
+              <span>{highlight}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Bullet points if present */}
+        {item.bullets && item.bullets.length > 0 && (
+          <ul className="mt-4 space-y-2">
+            {item.bullets.map((bullet, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-gray-400 text-sm">
+                <div
+                  className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+                  style={{ backgroundColor: '#4a4a4a' }}
+                />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
+const Experience: React.FC = () => {
+  const experiences: ExperienceItem[] = [
+    {
+      role: 'HPC & Cloud Research Engineer',
+      company: 'Emory University - Research Computing',
+      period: 'Aug 2024 - Present',
+      location: 'Atlanta, GA',
+      accent: '#B8860B',
+      highlights: [
+        'Building a multimodal foundation model that combines ECG signals with clinical text for diagnostic applications, achieving state-of-the-art performance on downstream tasks',
+        'Built a GPU monitoring system using Python and NVIDIA DCGM to track utilization metrics across compute nodes, streaming data to Prometheus for real-time visualization in Grafana dashboards',
+        'Architected GPU monitoring on Emory\'s HyPER C3 cluster from scratch. Flags misallocated jobs, automates user lifecycle, saving thousands in compute costs.',
+        'Designed testing pipelines for AWS ParallelCluster architecture upgrades, ensuring compute nodes maintain functionality, correct user permissions, and compatibility with ML workloads',
+        'Created alerting systems for underutilized GPU resources, helping optimize costs on high-performance compute instances',
+        'Engineering and maintaining high-performance computing infrastructure that supports AI/ML research across the university.',
+      ],
+      bullets: [
+        'Automated user lifecycle management via SLURM accounting database integration',
+        'Built ML training pipelines on AWS and GCP with distributed data processing',
+        'Collaborated with medical professionals to align models with clinical workflows',
+        'Conducted research in multimodal AI systems and foundation models for biomedical signals',
+        'Developed a RAG system for biomedical document understanding using PyTorch and LangChain',
+      ],
+    },
+    {
+      role: 'ML Research Assistant',
+      company: 'MAIX Lab, Emory University',
+      period: 'May 2024 - Present',
+      location: 'Atlanta, GA',
+      accent: '#6B8E23',
+      highlights: [
+        'Published research on biomedical question answering and ECG/PPG signal processing in peer-reviewed conferences',
+        'Conducted research in computer vision and deep learning for medical imaging applications.',
+        'Developed CNN-based models for automated disease detection from medical scans',
+        'Contributed to open-source medical imaging datasets to support the research community',
+      ],
+    },
+    {
+      role: 'Machine Learning Researcher',
+      company: 'University of Winnipeg',
+      period: 'Jul 2023 - Oct 2023',
+      location: 'Winnipeg, Canada',
+      accent: '#708090',
+      highlights: [
+        'Published research papers in medical AI focusing on diagnostic imaging and disease classification',
+        'Collaborated with medical professionals to ensure models aligned with clinical workflows and diagnostic standards',
+      ],
+    },
+    {
+      role: 'Prompt Engineer',
+      company: 'Insignia Consultancy',
+      period: 'Jan 2023 - Jul 2023',
+      location: 'Remote',
+      accent: '#CD853F',
+      highlights: [
+        'Engineered prompt templates for GPT-4 and Claude to improve response quality and consistency across customer-facing applications',
+        'Designed and optimized prompts for large language models in production environments.',
+        'Developed testing frameworks to evaluate prompt performance and identify edge cases in LLM behavior',
+        'Worked with product teams to refine model outputs based on user feedback and business requirements',
+      ],
+    },
+  ];
 
   return (
     <section
       id="experience"
-      ref={ref}
-      className="relative py-24 px-6 sm:px-8 lg:px-12 bg-[#0d0b09] overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      {/* Dot grid background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
 
-      <div className="max-w-5xl mx-auto relative z-10">
-        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
-          <motion.div variants={up} className="mb-6">
-            <span className="inline-flex items-center gap-3 text-[#B8860B] text-xs tracking-[0.25em] uppercase font-medium" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <span className="w-10 h-px bg-[#B8860B]" />
+      {/* Radial glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Section Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={fadeUp}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-4 mb-2">
+            <div
+              className="w-12 h-[3px] rounded-full"
+              style={{ backgroundColor: '#B8860B' }}
+            />
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               Experience
-            </span>
-          </motion.div>
-          <motion.h2 variants={up} className="text-4xl md:text-5xl font-light text-white/90 mb-16 leading-[1.1]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            Professional<br />Experience
-          </motion.h2>
+            </h2>
+          </div>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-[11px] top-2 bottom-2 w-px bg-gradient-to-b from-[#B8860B]/30 via-[#B8860B]/10 to-transparent" />
-
-          <div className="space-y-10">
-            {experiences.map((exp, idx) => (
-              <motion.div
-                key={idx}
-                className="relative pl-10"
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: idx * 0.15, ease: bezier }}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-2 w-[23px] h-[23px] rounded-full border-2 flex items-center justify-center" style={{ borderColor: exp.accent }}>
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: exp.accent }} />
-                </div>
-
-                <div className="group rounded-sm p-6 bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] hover:bg-white/[0.03] transition-all duration-500">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-medium text-white/80" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                        {exp.title}
-                      </h3>
-                      <p className="text-sm text-white/40 mt-0.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>{exp.company}</p>
-                    </div>
-                    <div className="text-xs text-white/25 mt-2 sm:mt-0 sm:text-right tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                      <p>{exp.period}</p>
-                      <p>{exp.location}</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-white/35 mb-4 leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>{exp.description}</p>
-                  <ul className="space-y-2">
-                    {exp.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-white/30" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                        <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: exp.accent }} />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        {/* Timeline */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+        >
+          {experiences.map((experience, index) => (
+            <ExperienceItem key={index} item={experience} index={index} />
+          ))}
+        </motion.div>
       </div>
-
-
     </section>
   );
-}
+};
+
+export default Experience;

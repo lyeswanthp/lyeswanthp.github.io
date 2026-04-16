@@ -1,41 +1,141 @@
-import { motion, useInView, type Variants } from 'framer-motion';
-import { useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const bezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const stagger: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
-const up: Variants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: bezier } } };
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.13,
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: bezier,
+    },
+  },
+};
 
 const Research: React.FC = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-
   return (
     <section
       id="research"
-      ref={ref}
-      className="relative py-24 px-6 sm:px-8 lg:px-12 bg-[#0d0b09] overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
+      {/* Dot grid background */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundImage:
+            'radial-gradient(rgba(184,134,11,0.4) 1px, transparent 1px)',
           backgroundSize: '30px 30px',
         }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
-          <motion.div variants={up} className="mb-16">
-            <span className="inline-flex items-center gap-3 text-[#B8860B] text-xs tracking-[0.25em] uppercase font-medium mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <span className="w-10 h-px bg-[#B8860B]" />
-              Research
-            </span>
-            <h2 className="text-4xl md:text-5xl font-light text-white/90 leading-[1.1]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      {/* Radial glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 50%, rgba(184,134,11,0.15) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 max-w-4xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+          className="text-center"
+        >
+          {/* In Progress Badge */}
+          <motion.div variants={fadeUp} className="mb-8">
+            <span
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border"
+              style={{
+                backgroundColor: 'rgba(184,134,11,0.1)',
+                borderColor: 'rgba(184,134,11,0.3)',
+                color: '#B8860B',
+              }}
+            >
+              <span
+                className="w-2 h-2 rounded-full animate-pulse"
+                style={{ backgroundColor: '#B8860B' }}
+              />
               In Progress
-            </h2>
-            <p className="text-base md:text-lg text-white/45 leading-relaxed max-w-2xl mt-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Currently working on new publications and research projects. Check back soon or reach out to discuss ongoing work in healthcare AI and multimodal foundation models.
-            </p>
+            </span>
+          </motion.div>
+
+          {/* Section Heading */}
+          <motion.div variants={fadeUp} className="mb-6">
+            <div className="flex items-center justify-center gap-4 mb-2">
+              <div
+                className="w-12 h-[3px] rounded-full"
+                style={{ backgroundColor: '#B8860B' }}
+              />
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Research
+              </h2>
+              <div
+                className="w-12 h-[3px] rounded-full"
+                style={{ backgroundColor: '#B8860B' }}
+              />
+            </div>
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h3
+            variants={fadeUp}
+            className="text-2xl md:text-3xl font-bold text-white mb-4"
+          >
+            Building AI That Matters
+          </motion.h3>
+
+          {/* Subheading */}
+          <motion.p
+            variants={fadeUp}
+            className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto"
+          >
+            17+ publications spanning healthcare AI, multimodal models, and foundation models for biomedical signals.
+          </motion.p>
+
+          {/* CTA Button */}
+          <motion.div variants={fadeUp}>
+            <a
+              href="https://github.com/lyeswanthp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 border hover:scale-105"
+              style={{
+                backgroundColor: 'transparent',
+                borderColor: '#B8860B',
+                color: '#B8860B',
+              }}
+            >
+              View Publications
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+            </a>
           </motion.div>
         </motion.div>
       </div>

@@ -1,91 +1,198 @@
-import { motion, useInView, type Variants } from 'framer-motion';
-import { useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const bezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const stagger: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
-const up: Variants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: bezier } } };
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.13,
+    },
+  },
+};
 
-const skillGroups = [
-  {
-    title: 'AI/ML Frameworks',
-    accent: '#B8860B',
-    skills: ['PyTorch', 'TensorFlow', 'Keras', 'Hugging Face', 'LangChain', 'LangGraph', 'Transformers', 'Scikit-learn'],
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: bezier,
+    },
   },
-  {
-    title: 'Core ML Skills',
-    accent: '#CD853F',
-    skills: ['Deep Learning', 'Computer Vision', 'Natural Language Processing', 'RAG Systems', 'Distributed Training', 'Time Series Analysis'],
-  },
-  {
-    title: 'Cloud & Infrastructure',
-    accent: '#6B8E23',
-    skills: ['AWS (EC2, S3, SageMaker)', 'Google Cloud Platform', 'Kubernetes', 'Docker', 'Slurm', 'Apache Spark', 'Ray'],
-  },
-  {
-    title: 'Data & Databases',
-    accent: '#708090',
-    skills: ['FAISS', 'ChromaDB', 'Pinecone', 'Neo4j', 'ElasticSearch', 'Redis', 'PostgreSQL', 'MongoDB'],
-  },
-  {
-    title: 'Programming Languages',
-    accent: '#9B59B6',
-    skills: ['Python', 'JavaScript', 'TypeScript', 'Bash/Shell'],
-  },
-  {
-    title: 'MLOps',
-    accent: '#B8860B',
-    skills: ['Model Deployment', 'Distributed Training', 'Prompt Engineering', 'OpenAI API'],
-  },
-];
+};
 
-export default function Skills() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+interface SkillCategory {
+  title: string;
+  accent: string;
+  skills: string[];
+}
+
+const SkillCategory: React.FC<{ category: SkillCategory }> = ({
+  category,
+}) => {
+  return (
+    <motion.div
+      variants={fadeUp}
+      className="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
+      <div className="flex items-center gap-3 mb-4">
+        <div
+          className="w-3 h-3 rounded-full"
+          style={{ backgroundColor: category.accent }}
+        />
+        <h3
+          className="text-lg font-semibold"
+          style={{ color: category.accent }}
+        >
+          {category.title}
+        </h3>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {category.skills.map((skill, index) => (
+          <span
+            key={index}
+            className="text-gray-300 text-sm"
+          >
+            {skill}
+            {index < category.skills.length - 1 && (
+              <span className="text-gray-600 mx-2">|</span>
+            )}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+const Skills: React.FC = () => {
+  const skillCategories: SkillCategory[] = [
+    {
+      title: 'AI/ML Frameworks',
+      accent: '#B8860B',
+      skills: [
+        'PyTorch',
+        'TensorFlow',
+        'Keras',
+        'Hugging Face',
+        'LangChain',
+        'LangGraph',
+        'Scikit-learn',
+        'Transformers',
+      ],
+    },
+    {
+      title: 'Programming Languages',
+      accent: '#6B8E23',
+      skills: ['Python', 'JavaScript', 'TypeScript', 'SQL', 'Bash/Shell'],
+    },
+    {
+      title: 'Data & Databases',
+      accent: '#708090',
+      skills: [
+        'PostgreSQL',
+        'MongoDB',
+        'Redis',
+        'Neo4j',
+        'ChromaDB',
+        'FAISS',
+        'Pinecone',
+        'ElasticSearch',
+        'Apache Spark',
+      ],
+    },
+    {
+      title: 'Cloud & Infrastructure',
+      accent: '#CD853F',
+      skills: [
+        'Docker',
+        'Kubernetes',
+        'AWS (EC2, S3, SageMaker)',
+        'Google Cloud Platform',
+        'Slurm',
+        'Distributed Training',
+        'MLOps',
+        'Ray',
+      ],
+    },
+    {
+      title: 'Technical',
+      accent: '#9B59B6',
+      skills: [
+        'Computer Vision',
+        'Deep Learning',
+        'NLP',
+        'RAG Systems',
+        'Time Series Analysis',
+        'Model Deployment',
+        'Natural Language Processing',
+        'Core ML Skills',
+      ],
+    },
+  ];
 
   return (
     <section
       id="skills"
-      ref={ref}
-      className="relative py-24 px-6 sm:px-8 lg:px-12 bg-[#0d0b09] overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
+      {/* Dot grid background */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
         }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
-          <motion.div variants={up} className="mb-16">
-            <span className="inline-flex items-center gap-3 text-[#B8860B] text-xs tracking-[0.25em] uppercase font-medium mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <span className="w-10 h-px bg-[#B8860B]" />
-              Technical
-            </span>
-            <h2 className="text-4xl md:text-5xl font-light text-white/90 leading-[1.1]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      {/* Radial glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={fadeUp}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-4 mb-2">
+            <div
+              className="w-12 h-[3px] rounded-full"
+              style={{ backgroundColor: '#B8860B' }}
+            />
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               Skills
             </h2>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <motion.div variants={stagger} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skillGroups.map((group, i) => (
-              <motion.div key={i} variants={up}>
-                <div className="text-[10px] text-white/25 tracking-[0.2em] uppercase mb-4" style={{ fontFamily: "'DM Sans', sans-serif", color: group.accent }}>
-                  {group.title}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {group.skills.map((skill, j) => (
-                    <span key={j} className="text-xs text-white/45 tracking-[0.1em] px-3 py-1.5 rounded-sm border border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12] hover:bg-white/[0.04] transition-all duration-300" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+        {/* Skills Grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {skillCategories.map((category, index) => (
+            <SkillCategory key={index} category={category} />
+          ))}
         </motion.div>
       </div>
     </section>
   );
-}
+};
+
+export default Skills;

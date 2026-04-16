@@ -1,131 +1,268 @@
-import { motion, useInView, type Variants } from 'framer-motion';
-import { useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const bezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const stagger: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
-const up: Variants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: bezier } } };
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.13,
+    },
+  },
+};
 
-const projects = [
-  {
-    title: 'Code Review System',
-    description: 'Multi-agent LLM code review engine with specialized agents for syntax, logic, security, and git history analysis. Supports Ruff, Semgrep, Bandit, and ESLint with multi-provider LLM integration via LangGraph.',
-    tags: ['LangGraph', 'LangChain', 'FastAPI', 'Docker', 'OpenAI', 'GitPython', 'Ruff', 'Semgrep'],
-    link: 'https://github.com/lyeswanthp/Code-Review-System',
-    featured: true,
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: bezier,
+    },
   },
-  {
-    title: 'Air Drawing AI',
-    description: 'Real-time air-gesture drawing system using MediaPipe Hands (21-landmark, 30+ FPS) and TensorFlow.js DoodleNet for sketch classification, with Ollama LLaVA/Llama Vision for multimodal sketch understanding via WebSocket streaming.',
-    tags: ['MediaPipe', 'TensorFlow.js', 'WebSocket', 'Ollama', 'Cerebras', 'NVIDIA NIM'],
-    link: 'https://github.com/lyeswanthp/air-drawing-ai',
-    featured: true,
-  },
-  {
-    title: 'MemRAG-BioQA for Biomedical QA',
-    description: 'Memory-augmented retrieval system for biomedical question answering with domain-specific knowledge graphs.',
-    tags: ['LangChain', 'Neo4j', 'ChromaDB', 'BioBERT', 'FAISS', 'Redis'],
-    link: null,
-    featured: false,
-  },
-  {
-    title: 'Medical Image Classification',
-    description: 'Deep learning models for automated disease detection from medical imaging data.',
-    tags: ['PyTorch', 'CNN', 'Transfer Learning', 'Transformers', 'Keras'],
-    link: null,
-    featured: false,
-  },
-  {
-    title: 'Multimodal RAG for Document Understanding',
-    description: 'Advanced retrieval-augmented generation system combining text and visual understanding for complex document analysis.',
-    tags: ['LangChain', 'FAISS', 'OpenAI', 'Groq', 'Pinecone'],
-    link: null,
-    featured: false,
-  },
-  {
-    title: 'RAG System for Live Web Content',
-    description: 'Real-time web scraping and retrieval system with dynamic content indexing and semantic search capabilities.',
-    tags: ['BeautifulSoup', 'LangChain', 'ElasticSearch', 'FastAPI', 'Redis'],
-    link: null,
-    featured: false,
-  },
-];
+};
 
-export default function Projects() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  link?: string | null;
+  featured?: boolean;
+}
+
+const ProjectCard: React.FC<{ project: Project; featured?: boolean }> = ({
+  project,
+  featured = false,
+}) => {
+  const content = (
+    <motion.div
+      variants={fadeUp}
+      className={`group relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-[#B8860B]/50 transition-all duration-300 ${
+        featured ? 'md:col-span-2' : ''
+      }`}
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: 'radial-gradient(circle at 50% 0%, rgba(184,134,11,0.1), transparent 70%)',
+        }}
+      />
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: '#6B8E23' }}
+            />
+            <span
+              className="text-xs font-medium uppercase tracking-wider"
+              style={{ color: '#6B8E23' }}
+            >
+              Featured
+            </span>
+          </div>
+          {project.link && (
+            <svg
+              className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          )}
+        </div>
+        <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-[#B8860B] transition-colors">
+          {project.title}
+        </h3>
+        <p className="text-gray-300 text-sm leading-relaxed mb-4">
+          {project.description}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {project.tags.map((tag, index) => (
+            <span
+              key={index}
+              className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 text-gray-300 border border-white/10"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  if (project.link) {
+    return (
+      <a
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return content;
+};
+
+const Projects: React.FC = () => {
+  const featuredProjects: Project[] = [
+    {
+      title: 'Code Review System',
+      description:
+        'Multi-agent LLM code review engine with specialized agents for syntax, logic, security, and git history analysis. Supports Ruff, Semgrep, Bandit, and ESLint with multi-provider LLM integration via LangGraph.',
+      tags: [
+        'LangGraph',
+        'LangChain',
+        'Docker',
+        'FastAPI',
+        'GitPython',
+        'Ruff',
+        'Semgrep',
+        'Bandit',
+        'OpenAI',
+        'Groq',
+        'Ollama',
+        'PyTorch',
+      ],
+      link: 'https://github.com/lyeswanthp/Code-Review-System',
+      featured: true,
+    },
+    {
+      title: 'Air Drawing AI',
+      description:
+        'Real-time air-gesture drawing system using MediaPipe Hands (21-landmark, 30+ FPS) and TensorFlow.js DoodleNet for sketch classification, with Ollama LLaVA/Llama Vision for multimodal sketch understanding via WebSocket streaming.',
+      tags: ['MediaPipe', 'TensorFlow.js', 'WebSocket', 'Ollama', 'Keras', 'Python'],
+      link: 'https://github.com/lyeswanthp/air-drawing-ai',
+      featured: true,
+    },
+    {
+      title: 'MemRAG-BioQA for Biomedical QA',
+      description:
+        'Memory-augmented retrieval system for biomedical question answering with domain-specific knowledge graphs.',
+      tags: ['Neo4j', 'ChromaDB', 'FAISS', 'BioBERT', 'PyTorch'],
+      link: null,
+      featured: true,
+    },
+  ];
+
+  const otherProjects: Project[] = [
+    {
+      title: 'Medical Image Classification',
+      description:
+        'Deep learning models for automated disease detection from medical imaging data.',
+      tags: ['CNN', 'Keras', 'TensorFlow', 'Transfer Learning'],
+    },
+    {
+      title: 'Multimodal RAG for Document Understanding',
+      description:
+        'Advanced retrieval-augmented generation system combining text and visual understanding for complex document analysis.',
+      tags: ['LangChain', 'FAISS', 'OpenAI', 'Transformers'],
+    },
+  ];
 
   return (
     <section
       id="projects"
-      ref={ref}
-      className="relative py-24 px-6 sm:px-8 lg:px-12 bg-[#0d0b09] overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(184,134,11,0.04)_0%,transparent_65%)]" />
+      {/* Radial glow from top */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 0%, rgba(184,134,11,0.12) 0%, transparent 70%)',
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
-          <motion.div variants={up} className="mb-16">
-            <span className="inline-flex items-center gap-3 text-[#B8860B] text-xs tracking-[0.25em] uppercase font-medium mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <span className="w-10 h-px bg-[#B8860B]" />
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          backgroundImage:
+            'radial-gradient(rgba(184,134,11,0.4) 1px, transparent 1px)',
+          backgroundSize: '30px 30px',
+        }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={fadeUp}
+          className="mb-12 flex items-center justify-between"
+        >
+          <div className="flex items-center gap-4">
+            <div
+              className="w-12 h-[3px] rounded-full"
+              style={{ backgroundColor: '#B8860B' }}
+            />
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               Projects
-            </span>
-            <h2 className="text-4xl md:text-5xl font-light text-white/90 leading-[1.1]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Selected Work
             </h2>
-          </motion.div>
+          </div>
+          <a
+            href="https://github.com/lyeswanthp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+              />
+            </svg>
+            <span className="hidden md:inline text-sm">GitHub</span>
+          </a>
+        </motion.div>
 
-          <motion.div variants={stagger} className="grid md:grid-cols-2 gap-6">
-            {projects.map((p, i) => (
-              <motion.div
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: i * 0.1, ease: bezier } },
-                }}
-                className={`group relative rounded-sm p-6 bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] hover:bg-white/[0.04] transition-all duration-500 ${p.featured ? 'md:col-span-2' : ''}`}
-              >
-                {p.featured && (
-                  <span className="inline-block text-[10px] tracking-[0.2em] uppercase text-[#B8860B] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    Featured
-                  </span>
-                )}
+        {/* Featured Projects */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+        >
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={index} project={project} featured />
+          ))}
+        </motion.div>
 
-                <h3 className="text-xl font-light text-white/90 mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  {p.title}
-                </h3>
-                <p className="text-sm text-white/45 leading-relaxed mb-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  {p.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {p.tags.map((tag, j) => (
-                    <span key={j} className="text-[10px] text-white/25 tracking-[0.15em] uppercase px-2 py-1 rounded-sm border border-white/[0.06]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {p.link && (
-                  <motion.a
-                    href={p.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[10px] text-white/25 tracking-[0.15em] uppercase hover:text-[#B8860B] transition-colors duration-300"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                    </svg>
-                    View on GitHub
-                  </motion.a>
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
+        {/* Other Projects */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {otherProjects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
+          ))}
         </motion.div>
       </div>
     </section>
   );
-}
+};
+
+export default Projects;

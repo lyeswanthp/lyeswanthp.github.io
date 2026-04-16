@@ -1,108 +1,178 @@
-import { motion, useInView, type Variants } from 'framer-motion';
-import { useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const bezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const stagger: Variants = { hidden: {}, visible: { transition: { staggerChildren: 0.13 } } };
-const up: Variants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: bezier } } };
-
-const features = [
-  {
-    label: 'Production Projects',
-    title: 'Full-Stack AI',
-    description: 'From training foundation models on 1M+ signals to building the SLURM pipelines and Prometheus dashboards they run on.',
-    accent: '#B8860B',
+const stagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.13,
+    },
   },
-  {
-    label: 'HyPER C3 Cluster',
-    title: 'HPC Engineering',
-    description: 'Architected GPU monitoring on Emory\'s HyPER C3 cluster from scratch. Flags misallocated jobs, automates user lifecycle — saving thousands in compute costs.',
-    accent: '#CD853F',
-  },
-  {
-    label: 'ISCE 2026',
-    title: 'Models that save',
-    description: 'Multimodal ECG foundation model accepted at ISCE 2026. Deployed in ambulances for real-time OMI detection across Grady Memorial & Rochester hospitals.',
-    accent: '#6B8E23',
-  },
-];
+};
 
-const stats = [
-  { value: '17+', label: 'Publications' },
-  { value: '1M+', label: 'Signals Processed' },
-  { value: 'LangGraph', label: 'Multi-Agent' },
-];
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.9,
+      ease: bezier,
+    },
+  },
+};
 
-export default function About() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+interface FeatureCardProps {
+  title: string;
+  accent: string;
+  description: string;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ title, accent, description }) => {
+  return (
+    <motion.div
+      variants={fadeUp}
+      className="relative group p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-[#B8860B]/50 transition-all duration-300"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle at 50% 0%, ${accent}15, transparent 70%)`,
+        }}
+      />
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-3">
+          <div
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: accent }}
+          />
+          <h3
+            className="text-lg font-semibold text-white"
+            style={{ color: accent }}
+          >
+            {title}
+          </h3>
+        </div>
+        <p className="text-gray-300 text-sm leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
+
+const About: React.FC = () => {
+  const features = [
+    {
+      title: 'CardioFM',
+      accent: '#B8860B',
+      description:
+        'Multimodal ECG foundation model accepted at ISCE 2026. Deployed in ambulances for real-time OMI detection across Grady Memorial & Rochester hospitals.',
+    },
+    {
+      title: 'HPC Engineering',
+      accent: '#6B8E23',
+      description:
+        'Architected GPU monitoring on Emory\'s HyPER C3 cluster from scratch. Flags misallocated jobs, automates user lifecycle, saving thousands in compute costs.',
+    },
+    {
+      title: 'Models that save',
+      accent: '#708090',
+      description:
+        'From training foundation models on 1M+ signals to building the SLURM pipelines and Prometheus dashboards they run on.',
+    },
+  ];
 
   return (
     <section
       id="about"
-      ref={ref}
-      className="relative py-24 px-6 sm:px-8 lg:px-12 bg-[#0d0b09] overflow-hidden"
+      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
+      {/* Dot grid background */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
         }}
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
-          <motion.div variants={up} className="mb-16">
-            <span className="inline-flex items-center gap-3 text-[#B8860B] text-xs tracking-[0.25em] uppercase font-medium mb-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              <span className="w-10 h-px bg-[#B8860B]" />
+      {/* Radial glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={fadeUp}
+          className="mb-16"
+        >
+          <div className="flex items-center gap-4 mb-2">
+            <div
+              className="w-12 h-[3px] rounded-full"
+              style={{ backgroundColor: '#B8860B' }}
+            />
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
               About
-            </span>
-            <h2 className="text-4xl md:text-5xl font-light text-white/90 leading-[1.1]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Systems that scale.<br />Models that perform.
             </h2>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24">
-            <motion.div variants={stagger} className="space-y-4">
-              {features.map((f, i) => (
-                <motion.div
-                  key={i}
-                  variants={up}
-                  className="group relative pl-6 py-5 pr-6 rounded-sm bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-500 cursor-default"
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full transition-all duration-500 group-hover:h-full" style={{ backgroundColor: f.accent }} />
-                  <div className="text-[10px] text-white/25 tracking-[0.2em] uppercase mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    {f.label}
-                  </div>
-                  <div className="text-xl font-light text-white/90 mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    {f.title}
-                  </div>
-                  <div className="text-sm text-white/45 leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    {f.description}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div variants={stagger}>
-              <motion.p variants={up} className="text-base md:text-lg text-white/50 leading-relaxed mb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                I'm an AI engineer and researcher working at the intersection of machine learning and healthcare. My work spans building multimodal foundation models for medical signals, designing the HPC infrastructure that trains them, and deploying those models into real clinical settings — like ambulances detecting heart attacks before patients reach the ER.
-              </motion.p>
-              <motion.p variants={up} className="text-base md:text-lg text-white/50 leading-relaxed mb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                Spanning healthcare AI, ECG/PPG signal processing, NLP, computer vision, and fairness-aware ML. Best Paper Award at OCIT 2024. 17+ peer-reviewed publications across top venues.
-              </motion.p>
-              <motion.div variants={up} className="flex flex-wrap gap-10">
-                {stats.map((s, i) => (
-                  <div key={i}>
-                    <div className="text-3xl md:text-4xl font-light" style={{ fontFamily: "'DM Sans', sans-serif", color: '#B8860B' }}>{s.value}</div>
-                    <div className="text-[10px] text-white/25 tracking-[0.2em] uppercase mt-1.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>{s.label}</div>
-                  </div>
-                ))}
-              </motion.div>
-            </motion.div>
           </div>
+        </motion.div>
+
+        {/* Feature Cards */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+        >
+          {features.map((feature, index) => (
+            <FeatureCard
+              key={index}
+              title={feature.title}
+              accent={feature.accent}
+              description={feature.description}
+            />
+          ))}
+        </motion.div>
+
+        {/* Bottom Stats Text */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={fadeUp}
+          className="text-center"
+        >
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#CD853F]/30 bg-[#CD853F]/10 mb-4"
+          >
+            <span
+              className="text-lg font-bold"
+              style={{ color: '#CD853F' }}
+            >
+              17+ Publications
+            </span>
+          </div>
+          <p className="text-gray-400 text-sm max-w-2xl mx-auto">
+            Spanning healthcare AI, ECG/PPG signal processing, NLP, computer vision, and fairness-aware ML. Best Paper Award at OCIT 2024.
+          </p>
         </motion.div>
       </div>
     </section>
   );
-}
+};
+
+export default About;
