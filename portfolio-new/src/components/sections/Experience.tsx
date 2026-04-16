@@ -33,10 +33,7 @@ interface ExperienceItem {
   bullets?: string[];
 }
 
-const ExperienceItem: React.FC<{ item: ExperienceItem; index: number }> = ({
-  item,
-  index,
-}) => {
+const ExperienceItem: React.FC<{ item: ExperienceItem }> = ({ item }) => {
   return (
     <motion.div
       variants={fadeUp}
@@ -224,7 +221,7 @@ const Experience: React.FC = () => {
           variants={stagger}
         >
           {experiences.map((experience, index) => (
-            <ExperienceItem key={index} item={experience} index={index} />
+            <ExperienceItem key={index} item={experience} />
           ))}
         </motion.div>
       </div>
