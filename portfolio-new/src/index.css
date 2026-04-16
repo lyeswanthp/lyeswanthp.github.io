@@ -1,1 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap");
 @import "tailwindcss";
+
+/* --- Theme variables (restored from historical deploy CSS, commit ~3504e7a) --- */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0d0b09;
+  --bg-secondary: #ffffff05;
+  --bg-tertiary: #ffffff0a;
+  --bg-hover: #ffffff08;
+  --text-primary: #ffffffcc;
+  --text-secondary: #ffffff40;
+  --text-muted: #ffffff26;
+  --border-primary: #ffffff0a;
+  --border-hover: #ffffff14;
+  --nav-bg: rgba(13, 11, 9, 0);
+  --nav-bg-scrolled: rgba(13, 11, 9, 0.95);
+}
+
+[data-theme="light"] {
+  --bg-primary: #faf8f3;
+  --bg-secondary: rgba(0, 0, 0, 0.03);
+  --bg-tertiary: rgba(0, 0, 0, 0.05);
+  --bg-hover: rgba(0, 0, 0, 0.06);
+  --text-primary: #1a1a1acc;
+  --text-secondary: #1a1a40;
+  --text-muted: #1a1a126;
+  --border-primary: rgba(0, 0, 0, 0.07);
+  --border-hover: rgba(0, 0, 0, 0.12);
+  --nav-bg: rgba(250, 248, 243, 0);
+  --nav-bg-scrolled: rgba(250, 248, 243, 0.95);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family:
+    "DM Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Sections follow theme background (important beats non-!important utilities) */
+section {
+  background-color: var(--bg-primary) !important;
+}
+
+/* Card & translucent surfaces → theme tokens */
+.bg-white\/\[0\.02\] {
+  background-color: var(--bg-secondary) !important;
+}
+.bg-white\/\[0\.04\] {
+  background-color: var(--bg-tertiary) !important;
+}
+.hover\:bg-white\/\[0\.03\]:hover,
+[data-theme="light"] .hover\:bg-white\/\[0\.03\]:hover {
+  background-color: var(--bg-hover) !important;
+}
+.hover\:bg-white\/\[0\.04\]:hover,
+[data-theme="light"] .hover\:bg-white\/\[0\.04\]:hover {
+  background-color: var(--bg-hover) !important;
+}
+
+/* Map "white" text utilities to theme primary */
+.text-white\/90,
+.text-white\/80,
+.text-white\/50,
+.text-white\/45,
+.text-white\/40,
+.text-white\/35,
+.text-white\/30,
+.text-white\/25,
+.text-white\/20,
+.text-white\/15,
+.text-white\/5 {
+  color: var(--text-primary) !important;
+}
+
+.border-white\/\[0\.04\],
+.border-white\/\[0\.06\],
+.border-white\/\[0\.08\] {
+  border-color: var(--border-primary) !important;
+}
+
+[data-theme="light"] .hover\:border-white\/\[0\.08\]:hover {
+  border-color: var(--border-hover) !important;
+}
+
+[data-theme="light"] .hover\:text-\[\#0d0b09\]:hover,
+.hover\:text-\[\#0d0b09\]:hover {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .text-\[\#6B8E23\/80\],
+.text-\[\#6B8E23\/80\] {
+  color: #4a6b2a !important;
+}
+
+[data-theme="light"] .text-\[\#CD853F\/80\],
+.text-\[\#CD853F\/80\] {
+  color: #8b5a2b !important;
+}
+
+[data-theme="light"] .text-\[\#0d0b09\] {
+  color: #1a1a1a !important;
+}
+
+/* Gray Tailwind utilities in light mode */
+[data-theme="light"] .text-gray-300 {
+  color: rgba(26, 26, 26, 0.78) !important;
+}
+[data-theme="light"] .text-gray-400 {
+  color: rgba(26, 26, 26, 0.62) !important;
+}
+[data-theme="light"] .text-gray-600 {
+  color: rgba(26, 26, 26, 0.42) !important;
+}
+[data-theme="light"] .hover\:text-white:hover,
+[data-theme="light"] .group-hover\:text-white:is(:where(.group):hover *) {
+  color: var(--text-primary) !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-track,
+html:not([data-theme]) ::-webkit-scrollbar-track {
+  background: #0d0b09;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb,
+html:not([data-theme]) ::-webkit-scrollbar-thumb {
+  background: linear-gradient(#b8860b66, #b8860b26);
+  border-radius: 3px;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover,
+html:not([data-theme]) ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#b8860b99, #b8860b4d);
+}
+
+html[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #ede6d6;
+}
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(#b8860b33, #b8860b1a);
+  border-radius: 3px;
+}
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#b8860b66, #b8860b33);
+}
+
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-primary);
+  border-radius: 0.25rem;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+.theme-toggle:hover {
+  opacity: 1;
+  border-color: var(--border-hover);
+  background: var(--bg-secondary);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+}
