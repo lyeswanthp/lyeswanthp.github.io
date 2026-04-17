@@ -148,26 +148,20 @@ const Hero: React.FC = () => {
               </span>
             </motion.h1>
 
-            <motion.p
+            <motion.div
               variants={fadeUp}
-              className="text-base md:text-lg text-white/45 leading-relaxed max-w-lg mb-4"
+              className="text-base md:text-lg text-white/45 leading-relaxed max-w-xl mb-12 space-y-4"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              I am in the MS in Computer Science program at Emory and work as a cloud computing assistant in Research
-              Computing. Day to day I build Python tooling for GPU monitoring on HPC clusters, support AWS and Jupyter
-              style workflows, and help researchers across departments get models trained without burning time or
-              budget.
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp}
-              className="text-base md:text-lg text-white/45 leading-relaxed max-w-lg mb-12"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              My research has been in healthcare AI at Emory, including multimodal work on ECG and clinical text for acute
-              conditions like occlusion MI. I also publish regularly; the number below is peer reviewed work, not blog
-              posts.
-            </motion.p>
+              <p>
+                I am an AI engineer at Emory. I work on foundation models for clinical signals, the clusters that train
+                and serve them, and research that has moved into deployments such as ambulances.
+              </p>
+              <p>
+                I completed the MS in Computer Science at Emory and work in the Office of Information Technology as a
+                cloud computing assistant, focused on Python and SLURM tooling for HPC.
+              </p>
+            </motion.div>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-10 mb-14">
               {heroStats.map((stat, i) => (

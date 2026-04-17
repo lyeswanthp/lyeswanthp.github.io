@@ -6,94 +6,66 @@ const stagger = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.13,
+      staggerChildren: 0.1,
     },
   },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.9,
+      duration: 0.7,
       ease: bezier,
     },
   },
 };
 
-interface FeatureCardProps {
-  title: string;
-  accent: string;
-  description: string;
-}
+const featureCards = [
+  {
+    title: 'Multi agent systems',
+    accent: '#B8860B',
+    description:
+      'Open source CLI that combines static analyzers with parallel specialist reviewers on a graph of your repository, built from tree sitter ASTs and a compact knowledge graph so agents see call chains and imports instead of flat file dumps.',
+  },
+  {
+    title: 'Real time AI',
+    accent: '#6B8E23',
+    description:
+      'AeroScript AI: hand tracking in the browser with MediaPipe, DoodleNet sketch guesses, and a local vision language model for gesture based drawing.',
+  },
+  {
+    title: 'RAG pipelines',
+    accent: '#CD853F',
+    description:
+      'Multimodal document RAG with ColPali style page embeddings and vision language answers over PDFs, plus retrieval over large ECG corpora paired with cardiologist reports.',
+  },
+  {
+    title: 'ML infrastructure',
+    accent: '#708090',
+    description:
+      'ECG Agent: Dockerized encoder, FAISS index, vLLM, and MCP services so encoding stays outside the LLM loop and only small embeddings flow through the agent graph.',
+  },
+] as const;
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ title, accent, description }) => {
-  return (
-    <motion.div
-      variants={fadeUp}
-      className="relative group p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-[#B8860B]/50 transition-all duration-300"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
-    >
-      <div
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(circle at 50% 0%, ${accent}15, transparent 70%)`,
-        }}
-      />
-      <div className="relative z-10">
-        <div className="flex items-center gap-3 mb-3">
-          <div
-            className="w-2 h-2 rounded-full"
-            style={{ backgroundColor: accent }}
-          />
-          <h3
-            className="text-lg font-semibold text-white"
-            style={{ color: accent }}
-          >
-            {title}
-          </h3>
-        </div>
-        <p className="text-gray-300 text-sm leading-relaxed">
-          {description}
-        </p>
-      </div>
-    </motion.div>
-  );
-};
+const projectLinks = [
+  { href: 'https://github.com/lyeswanthp/Multi_Agent_Code_Review_System', label: 'Multi_Agent_Code_Review_System' },
+  { href: 'https://github.com/lyeswanthp/AeroScriptAI', label: 'AeroScriptAI' },
+  { href: 'https://github.com/lyeswanthp/ECG-Agent', label: 'ECG-Agent' },
+  { href: 'https://github.com/lyeswanthp/multimodal-doc-rag', label: 'multimodal-doc-rag' },
+] as const;
 
 const About: React.FC = () => {
-  const features = [
-    {
-      title: 'CardioFM',
-      accent: '#B8860B',
-      description:
-        'Multimodal ECG foundation model accepted at ISCE 2026. Deployed in ambulances for real-time OMI detection across Grady Memorial & Rochester hospitals.',
-    },
-    {
-      title: 'HPC Engineering',
-      accent: '#6B8E23',
-      description:
-        'Architected GPU monitoring on Emory\'s HyPER C3 cluster from scratch. Flags misallocated jobs, automates user lifecycle, saving thousands in compute costs.',
-    },
-    {
-      title: 'Models that save',
-      accent: '#708090',
-      description:
-        'From training foundation models on 1M+ signals to building the SLURM pipelines and Prometheus dashboards they run on.',
-    },
-  ];
-
   return (
     <section
       id="about"
-      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
+      className="relative py-24 px-6 sm:px-8 lg:px-12 bg-[#0d0b09] overflow-hidden"
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
-      {/* Dot grid background */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage:
             'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
@@ -101,75 +73,93 @@ const About: React.FC = () => {
         }}
       />
 
-      {/* Radial glow */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%)',
-        }}
-      />
-
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Section Heading */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={fadeUp}
-          className="mb-16"
-        >
-          <div className="flex items-center gap-4 mb-2">
-            <div
-              className="w-12 h-[3px] rounded-full"
-              style={{ backgroundColor: '#B8860B' }}
-            />
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              About
-            </h2>
-          </div>
-        </motion.div>
-
-        {/* Feature Cards */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={stagger}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-        >
-          {features.map((feature, index) => (
-            <FeatureCard
-              key={index}
-              title={feature.title}
-              accent={feature.accent}
-              description={feature.description}
-            />
-          ))}
-        </motion.div>
-
-        {/* Bottom Stats Text */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={fadeUp}
-          className="text-center"
-        >
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#CD853F]/30 bg-[#CD853F]/10 mb-4"
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={stagger}
           >
-            <span
-              className="text-lg font-bold"
-              style={{ color: '#CD853F' }}
+            <motion.div variants={fadeUp} className="mb-6">
+              <span className="inline-flex items-center gap-3 text-[#B8860B] text-xs tracking-[0.25em] uppercase font-medium">
+                <span className="w-10 h-px bg-[#B8860B]" />
+                About
+              </span>
+            </motion.div>
+
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl md:text-4xl font-light text-white/90 mb-8 leading-[1.1]"
             >
-              17+ Publications
-            </span>
-          </div>
-          <p className="text-gray-400 text-sm max-w-2xl mx-auto">
-            Spanning healthcare AI, ECG/PPG signal processing, NLP, computer vision, and fairness-aware ML. Best Paper Award at OCIT 2024.
-          </p>
-        </motion.div>
+              About me
+            </motion.h2>
+
+            <motion.div variants={fadeUp} className="space-y-5 mb-10">
+              <p className="text-base text-white/45 leading-relaxed">
+                I&apos;m an AI engineer who goes from training foundation models on million scale ECG signals to building
+                the GPU clusters they run on, and right now one of those models is being tested in ambulances to catch
+                heart attacks before patients reach the ER.
+              </p>
+              <p className="text-base text-white/45 leading-relaxed">
+                I recently graduated from the MS in Computer Science program at Emory and work as a cloud computing
+                assistant in the Office of Information Technology, Emory University. Day to day I build Python and SLURM
+                tooling for applications on HPC clusters.
+              </p>
+              <p className="text-base text-white/45 leading-relaxed">
+                My research has been in healthcare AI at Emory, including foundation model and multimodal work on ECG and
+                PPG, with peer reviewed publications.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="pt-8 border-t border-white/[0.06]"
+            >
+              <p className="text-[10px] sm:text-xs text-white/35 uppercase tracking-[0.12em] mb-3">
+                Recent repositories
+              </p>
+              <p className="text-xs sm:text-sm text-white/45 leading-relaxed break-words">
+                {projectLinks.map((link, i) => (
+                  <React.Fragment key={link.href}>
+                    {i > 0 ? <span className="text-white/25"> · </span> : null}
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#B8860B] hover:underline"
+                    >
+                      {link.label}
+                    </a>
+                  </React.Fragment>
+                ))}
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={stagger}
+            className="space-y-4"
+          >
+            {featureCards.map((card) => (
+              <motion.div
+                key={card.title}
+                variants={fadeUp}
+                className="group relative pl-6 py-5 pr-6 rounded-sm bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-500"
+              >
+                <div
+                  className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full transition-all duration-500 group-hover:h-full"
+                  style={{ backgroundColor: card.accent, opacity: 0.6 }}
+                />
+                <h3 className="text-lg font-medium text-white/80 mb-1.5">{card.title}</h3>
+                <p className="text-sm text-white/35 leading-relaxed">{card.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
