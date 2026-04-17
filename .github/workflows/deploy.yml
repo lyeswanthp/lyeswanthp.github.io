@@ -22,29 +22,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: "portfolio-new/package-lock.json"
-
-      - name: Install dependencies
-        run: |
-          cd portfolio-new
-          npm ci
-
-      - name: Build portfolio
-        run: |
-          cd portfolio-new
-          npm run build
-        env:
-          CI: true
+      # Live site uses the preserved Apr 14 2026 static build (commit 538b9a9).
+      # To deploy from source again, replace the path below with portfolio-new/dist
+      # and restore Node setup + npm ci + npm run build steps.
+      - name: Copy favicon into legacy snapshot
+        run: cp portfolio-new/public/vite.svg legacy-snapshot-538b9a9/vite.svg
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: portfolio-new/dist
+          path: legacy-snapshot-538b9a9
 
   deploy:
     environment:
