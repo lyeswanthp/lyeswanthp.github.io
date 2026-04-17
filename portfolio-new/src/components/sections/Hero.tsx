@@ -34,7 +34,6 @@ const ECGWave: React.FC = () => {
       const step = width / ecgData.length;
       const midY = height / 2;
 
-      // Outer wave
       ctx.beginPath();
       ctx.strokeStyle = 'rgba(184,134,11,0.06)';
       ctx.lineWidth = 10;
@@ -48,7 +47,6 @@ const ECGWave: React.FC = () => {
       }
       ctx.stroke();
 
-      // Inner wave
       ctx.beginPath();
       ctx.strokeStyle = 'rgba(184,134,11,0.2)';
       ctx.lineWidth = 1.5;
@@ -90,13 +88,17 @@ const fadeUp = {
   },
 };
 
+const heroStats = [
+  { value: '5+', label: 'Production projects' },
+  { value: 'LangGraph', label: 'Multi agent' },
+  { value: '17+', label: 'Research papers' },
+] as const;
+
 const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0d0b09]">
-      {/* Radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full bg-[radial-gradient(circle,rgba(184,134,11,0.07)_0%,transparent_65%)]" />
 
-      {/* Noise texture */}
       <div
         className="absolute inset-0 opacity-[0.025]"
         style={{
@@ -105,10 +107,8 @@ const Hero: React.FC = () => {
         }}
       />
 
-      {/* ECG wave */}
       <ECGWave />
 
-      {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12">
         <div className="grid lg:grid-cols-[1fr_auto] gap-16 items-center min-h-screen py-32">
           <motion.div
@@ -117,7 +117,6 @@ const Hero: React.FC = () => {
             animate="visible"
             className="max-w-2xl"
           >
-            {/* Tagline */}
             <motion.div variants={fadeUp} className="mb-8">
               <span
                 className="inline-flex items-center gap-3 text-[#B8860B] text-xs tracking-[0.25em] uppercase font-medium"
@@ -128,7 +127,6 @@ const Hero: React.FC = () => {
               </span>
             </motion.div>
 
-            {/* Name */}
             <motion.h1 variants={fadeUp} className="mb-6">
               <span
                 className="block text-[clamp(3.5rem,8vw,6rem)] font-light text-white/90 leading-[0.92] tracking-tight"
@@ -150,22 +148,29 @@ const Hero: React.FC = () => {
               </span>
             </motion.h1>
 
-            {/* Tagline */}
             <motion.p
               variants={fadeUp}
-              className="text-base md:text-lg text-white/45 leading-relaxed max-w-md mb-12"
+              className="text-base md:text-lg text-white/45 leading-relaxed max-w-lg mb-4"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Building AI that runs in the real world: from training foundation models on million-scale medical signals to deploying them in ambulances.
+              I am in the MS in Computer Science program at Emory and work as a cloud computing assistant in Research
+              Computing. Day to day I build Python tooling for GPU monitoring on HPC clusters, support AWS and Jupyter
+              style workflows, and help researchers across departments get models trained without burning time or
+              budget.
             </motion.p>
 
-            {/* Stats */}
+            <motion.p
+              variants={fadeUp}
+              className="text-base md:text-lg text-white/45 leading-relaxed max-w-lg mb-12"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              My research has been in healthcare AI at Emory, including multimodal work on ECG and clinical text for acute
+              conditions like occlusion MI. I also publish regularly; the number below is peer reviewed work, not blog
+              posts.
+            </motion.p>
+
             <motion.div variants={fadeUp} className="flex flex-wrap gap-10 mb-14">
-              {[
-                { value: '17+', label: 'Publications' },
-                { value: 'ISCE', label: 'Best Paper Award' },
-                { value: '0.87', label: 'AUROC · OMI' },
-              ].map((stat, i) => (
+              {heroStats.map((stat, i) => (
                 <div key={i}>
                   <div
                     className="text-3xl md:text-4xl font-light text-[#B8860B]"
@@ -183,11 +188,10 @@ const Hero: React.FC = () => {
               ))}
             </motion.div>
 
-            {/* CTAs */}
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
               {[
-                { href: '#cardiofm', label: 'See CardioFM', primary: true },
-                { href: '#contact', label: 'Get in Touch', primary: false },
+                { href: '#projects', label: 'View projects', primary: true },
+                { href: '#contact', label: 'Get in touch', primary: false },
                 {
                   href: 'https://drive.google.com/file/d/1v8EoGp7CwuMjfkC0qoE7uoC6Jz8g6P9R/view',
                   label: 'Resume',
@@ -229,7 +233,6 @@ const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* Side label */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -248,7 +251,6 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
