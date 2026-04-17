@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 const bezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -48,13 +47,6 @@ const featureCards = [
     description:
       'ECG Agent: Dockerized encoder, FAISS index, vLLM, and MCP services so encoding stays outside the LLM loop and only small embeddings flow through the agent graph.',
   },
-] as const;
-
-const projectLinks = [
-  { href: 'https://github.com/lyeswanthp/Multi_Agent_Code_Review_System', label: 'Multi_Agent_Code_Review_System' },
-  { href: 'https://github.com/lyeswanthp/AeroScriptAI', label: 'AeroScriptAI' },
-  { href: 'https://github.com/lyeswanthp/ECG-Agent', label: 'ECG-Agent' },
-  { href: 'https://github.com/lyeswanthp/multimodal-doc-rag', label: 'multimodal-doc-rag' },
 ] as const;
 
 const About: React.FC = () => {
@@ -109,30 +101,6 @@ const About: React.FC = () => {
               <p className="text-base text-white/45 leading-relaxed">
                 My research has been in healthcare AI at Emory, including foundation model and multimodal work on ECG and
                 PPG, with peer reviewed publications.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="pt-8 border-t border-white/[0.06]"
-            >
-              <p className="text-[10px] sm:text-xs text-white/35 uppercase tracking-[0.12em] mb-3">
-                Recent repositories
-              </p>
-              <p className="text-xs sm:text-sm text-white/45 leading-relaxed break-words">
-                {projectLinks.map((link, i) => (
-                  <React.Fragment key={link.href}>
-                    {i > 0 ? <span className="text-white/25"> · </span> : null}
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#B8860B] hover:underline"
-                    >
-                      {link.label}
-                    </a>
-                  </React.Fragment>
-                ))}
               </p>
             </motion.div>
           </motion.div>
