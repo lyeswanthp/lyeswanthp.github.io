@@ -114,7 +114,7 @@ const Research: React.FC = () => {
               href="https://github.com/lyeswanthp"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 border hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 border hover:scale-105"
               style={{
                 backgroundColor: 'transparent',
                 borderColor: '#B8860B',

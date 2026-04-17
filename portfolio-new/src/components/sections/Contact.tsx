@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
           <motion.div variants={fadeUp}>
             <a
               href="mailto:lpanchu@emory.edu"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 border hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 border hover:scale-105"
               style={{
                 backgroundColor: 'transparent',
                 borderColor: '#B8860B',

@@ -92,9 +92,23 @@ section {
   color: var(--text-primary) !important;
 }
 
+/* Plain `text-white` (full white) — stays white in dark mode; must switch in light mode */
+[data-theme="light"] .text-white {
+  color: var(--text-primary) !important;
+}
+
 .border-white\/\[0\.04\],
 .border-white\/\[0\.06\],
 .border-white\/\[0\.08\] {
+  border-color: var(--border-primary) !important;
+}
+
+/* Common translucent white surfaces (cards, tags) — theme-aware */
+.bg-white\/5 {
+  background-color: var(--bg-secondary) !important;
+}
+.border-white\/10,
+.border-white\/12 {
   border-color: var(--border-primary) !important;
 }
 
