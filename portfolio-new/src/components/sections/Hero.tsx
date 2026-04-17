@@ -187,7 +187,7 @@ const Hero: React.FC = () => {
                 { href: '#projects', label: 'View projects', primary: true },
                 { href: '#contact', label: 'Get in touch', primary: false },
                 {
-                  href: 'https://drive.google.com/file/d/1v8EoGp7CwuMjfkC0qoE7uoC6Jz8g6P9R/view',
+                  href: 'https://drive.google.com/file/d/1hGo55m7nZhrow5VOIGiHC9dxIMdRmotw/view?usp=sharing',
                   label: 'Resume',
                   primary: false,
                   external: true,

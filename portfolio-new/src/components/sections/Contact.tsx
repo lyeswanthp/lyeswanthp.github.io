@@ -81,20 +81,33 @@ const Contact: React.FC = () => {
           </motion.p>
 
           {/* Email */}
-          <motion.div variants={fadeUp} className="mb-8">
+          <motion.div variants={fadeUp} className="mb-6">
             <a
-              href="mailto:lpanchu@emory.edu"
+              href="mailto:lovelyyeswanth2002@gmail.com"
               className="text-xl font-medium hover:underline"
               style={{ color: '#B8860B' }}
             >
-              lpanchu@emory.edu
+              lovelyyeswanth2002@gmail.com
+            </a>
+          </motion.div>
+
+          {/* LinkedIn */}
+          <motion.div variants={fadeUp} className="mb-8">
+            <a
+              href="https://www.linkedin.com/in/lovelyyeswanth/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xl font-medium hover:underline"
+              style={{ color: '#B8860B' }}
+            >
+              linkedin.com/in/lovelyyeswanth
             </a>
           </motion.div>
 
           {/* CTA Button */}
           <motion.div variants={fadeUp}>
             <a
-              href="mailto:lpanchu@emory.edu"
+              href="mailto:lovelyyeswanth2002@gmail.com"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 border hover:scale-105"
               style={{
                 backgroundColor: 'transparent',
