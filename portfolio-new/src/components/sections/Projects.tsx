@@ -27,57 +27,20 @@ interface Project {
   title: string;
   description: string;
   tags: string[];
-  link: string;
+  link?: string | null;
   featured?: boolean;
 }
 
-const projects: Project[] = [
-  {
-    title: 'Multi-Agent Code Review System',
-    description:
-      'Multi-agent LLM code review with LangGraph orchestration, static analyzers (Ruff, Semgrep, Bandit, ESLint), and specialist reviewers for syntax, security, and git history.',
-    tags: ['Python', 'LangGraph', 'GitPython', 'Groq', 'OpenAI'],
-    link: 'https://github.com/lyeswanthp/Multi_Agent_Code_Review_System',
-    featured: true,
-  },
-  {
-    title: 'AeroScript AI',
-    description:
-      'Real-time air-gesture drawing with MediaPipe Hands, TensorFlow.js DoodleNet sketch classification, and multimodal vision-language understanding over WebSocket.',
-    tags: ['MediaPipe', 'TensorFlow.js', 'FastAPI', 'Ollama', 'WebSocket'],
-    link: 'https://github.com/lyeswanthp/AeroScriptAI',
-    featured: true,
-  },
-  {
-    title: 'ECG Agent',
-    description:
-      'Dockerized ECG encoder, FAISS retrieval, vLLM serving, and MCP tools so embeddings stay outside the LLM loop for ECG-focused QA.',
-    tags: ['Python', 'FAISS', 'vLLM', 'Docker', 'MCP'],
-    link: 'https://github.com/lyeswanthp/ECG-Agent',
-  },
-  {
-    title: 'Multimodal Document RAG',
-    description:
-      'PDF pages to images, ColPali visual embeddings, in-memory cosine retrieval, and DeepSeek Janus multimodal answers via a Gradio UI.',
-    tags: ['Python', 'ColPali', 'Gradio', 'Transformers', 'PDF'],
-    link: 'https://github.com/lyeswanthp/multimodal-doc-rag',
-  },
-  {
-    title: 'RL for Sepsis Treatment',
-    description:
-      'Reinforcement learning for ICU sepsis treatment policies from clinical trajectories, with evaluation and interpretability-focused analysis.',
-    tags: ['Python', 'PyTorch', 'Healthcare RL', 'Gym'],
-    link: 'https://github.com/lyeswanthp/Reinforcement-Learning-for-Sepsis-Treatment',
-  },
-];
-
-const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
-  const featuredClass = project.featured ? 'md:col-span-2 lg:col-span-2' : '';
-
-  const inner = (
+const ProjectCard: React.FC<{ project: Project; featured?: boolean }> = ({
+  project,
+  featured = false,
+}) => {
+  const content = (
     <motion.div
       variants={fadeUp}
-      className={`group relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-[#B8860B]/50 transition-all duration-300 ${featuredClass}`}
+      className={`group relative p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-[#B8860B]/50 transition-all duration-300 ${
+        featured ? 'md:col-span-2' : ''
+      }`}
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
       <div
@@ -88,39 +51,45 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
       />
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2 min-h-[1rem]">
-            {project.featured ? (
-              <>
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#6B8E23' }} />
-                <span className="text-xs font-medium uppercase tracking-wider" style={{ color: '#6B8E23' }}>
-                  Featured
-                </span>
-              </>
-            ) : null}
-          </div>
-          <svg
-            className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+          <div className="flex items-center gap-2">
+            <div
+              className="w-2 h-2 rounded-full"
+              style={{ backgroundColor: '#6B8E23' }}
             />
-          </svg>
+            <span
+              className="text-xs font-medium uppercase tracking-wider"
+              style={{ color: '#6B8E23' }}
+            >
+              Featured
+            </span>
+          </div>
+          {project.link && (
+            <svg
+              className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          )}
         </div>
         <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-[#B8860B] transition-colors">
           {project.title}
         </h3>
-        <p className="text-gray-300 text-sm leading-relaxed mb-4">{project.description}</p>
+        <p className="text-gray-300 text-sm leading-relaxed mb-4">
+          {project.description}
+        </p>
         <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag, i) => (
+          {project.tags.map((tag, index) => (
             <span
-              key={i}
+              key={index}
               className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 text-gray-300 border border-white/10"
             >
               {tag}
@@ -131,20 +100,85 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
     </motion.div>
   );
 
-  return (
-    <a href={project.link} target="_blank" rel="noopener noreferrer" className="block">
-      {inner}
-    </a>
-  );
+  if (project.link) {
+    return (
+      <a
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return content;
 };
 
 const Projects: React.FC = () => {
+  const featuredProjects: Project[] = [
+    {
+      title: 'Code Review System',
+      description:
+        'Multi-agent LLM code review engine with specialized agents for syntax, logic, security, and git history analysis. Supports Ruff, Semgrep, Bandit, and ESLint with multi-provider LLM integration via LangGraph.',
+      tags: [
+        'LangGraph',
+        'LangChain',
+        'Docker',
+        'FastAPI',
+        'GitPython',
+        'Ruff',
+        'Semgrep',
+        'Bandit',
+        'OpenAI',
+        'Groq',
+        'Ollama',
+        'PyTorch',
+      ],
+      link: 'https://github.com/lyeswanthp/Code-Review-System',
+      featured: true,
+    },
+    {
+      title: 'Air Drawing AI',
+      description:
+        'Real-time air-gesture drawing system using MediaPipe Hands (21-landmark, 30+ FPS) and TensorFlow.js DoodleNet for sketch classification, with Ollama LLaVA/Llama Vision for multimodal sketch understanding via WebSocket streaming.',
+      tags: ['MediaPipe', 'TensorFlow.js', 'WebSocket', 'Ollama', 'Keras', 'Python'],
+      link: 'https://github.com/lyeswanthp/air-drawing-ai',
+      featured: true,
+    },
+    {
+      title: 'MemRAG-BioQA for Biomedical QA',
+      description:
+        'Memory-augmented retrieval system for biomedical question answering with domain-specific knowledge graphs.',
+      tags: ['Neo4j', 'ChromaDB', 'FAISS', 'BioBERT', 'PyTorch'],
+      link: null,
+      featured: true,
+    },
+  ];
+
+  const otherProjects: Project[] = [
+    {
+      title: 'Medical Image Classification',
+      description:
+        'Deep learning models for automated disease detection from medical imaging data.',
+      tags: ['CNN', 'Keras', 'TensorFlow', 'Transfer Learning'],
+    },
+    {
+      title: 'Multimodal RAG for Document Understanding',
+      description:
+        'Advanced retrieval-augmented generation system combining text and visual understanding for complex document analysis.',
+      tags: ['LangChain', 'FAISS', 'OpenAI', 'Transformers'],
+    },
+  ];
+
   return (
     <section
       id="projects"
       className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
+      {/* Radial glow from top */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full pointer-events-none"
         style={{
@@ -153,15 +187,18 @@ const Projects: React.FC = () => {
         }}
       />
 
+      {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none opacity-30"
         style={{
-          backgroundImage: 'radial-gradient(rgba(184,134,11,0.4) 1px, transparent 1px)',
+          backgroundImage:
+            'radial-gradient(rgba(184,134,11,0.4) 1px, transparent 1px)',
           backgroundSize: '30px 30px',
         }}
       />
 
       <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section Heading */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -170,8 +207,13 @@ const Projects: React.FC = () => {
           className="mb-12 flex items-center justify-between"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-[3px] rounded-full" style={{ backgroundColor: '#B8860B' }} />
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Projects</h2>
+            <div
+              className="w-12 h-[3px] rounded-full"
+              style={{ backgroundColor: '#B8860B' }}
+            />
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Projects
+            </h2>
           </div>
           <a
             href="https://github.com/lyeswanthp"
@@ -179,7 +221,12 @@ const Projects: React.FC = () => {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <svg
+              className="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden
+            >
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -190,15 +237,29 @@ const Projects: React.FC = () => {
           </a>
         </motion.div>
 
+        {/* Featured Projects */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={stagger}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
         >
-          {projects.map((project) => (
-            <ProjectCard key={project.link} project={project} />
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={index} project={project} featured />
+          ))}
+        </motion.div>
+
+        {/* Other Projects */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={stagger}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {otherProjects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
           ))}
         </motion.div>
       </div>
