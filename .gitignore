@@ -7,11 +7,11 @@ dist-ssr/
 *.log
 .DS_Store
 
-# CI builds portfolio-new and deploys dist — do not commit output
+# GitHub Pages — built by CI, do not commit
+assets/
+!legacy-snapshot-538b9a9/assets/
+index.html
+!legacy-snapshot-538b9a9/index.html
+vite.svg
 portfolio-new/dist/
 portfolio-new/dist-ssr/
-
-# Accidental root-level build drops (legacy)
-/assets/
-/index.html
-/vite.svg
