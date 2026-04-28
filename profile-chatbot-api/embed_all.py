@@ -4,6 +4,7 @@ Run once whenever profile_documents.json changes.
 """
 
 import json
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -11,10 +12,11 @@ from openai import OpenAI
 
 load_dotenv()
 
-LMSTUDIO_BASE_URL = "http://127.0.0.1:1234/v1"
-EMBED_MODEL = "text-embedding-nomic-embed-text-v1.5"
+MODEL_BASE_URL = os.getenv("MODEL_BASE_URL", os.getenv("LMSTUDIO_BASE_URL", "http://127.0.0.1:1234/v1"))
+MODEL_API_KEY = os.getenv("MODEL_API_KEY", os.getenv("LMSTUDIO_API_KEY", "lm-studio"))
+EMBED_MODEL = os.getenv("EMBED_MODEL", os.getenv("LMSTUDIO_EMBED_MODEL", "text-embedding-nomic-embed-text-v1.5"))
 
-client = OpenAI(base_url=LMSTUDIO_BASE_URL, api_key="lm-studio")
+client = OpenAI(base_url=MODEL_BASE_URL, api_key=MODEL_API_KEY)
 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:

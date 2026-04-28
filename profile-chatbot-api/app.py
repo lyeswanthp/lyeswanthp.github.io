@@ -12,23 +12,33 @@ from pydantic import BaseModel
 
 load_dotenv()
 
-LMSTUDIO_BASE_URL = os.getenv("LMSTUDIO_BASE_URL", "http://127.0.0.1:1234/v1")
-CHAT_MODEL = os.getenv("LMSTUDIO_CHAT_MODEL", "qwen2.5-coder-3b-instruct-mlx")
-EMBED_MODEL = os.getenv("LMSTUDIO_EMBED_MODEL", "text-embedding-nomic-embed-text-v1.5")
+MODEL_BASE_URL = os.getenv("MODEL_BASE_URL", os.getenv("LMSTUDIO_BASE_URL", "http://127.0.0.1:1234/v1"))
+MODEL_API_KEY = os.getenv("MODEL_API_KEY", os.getenv("LMSTUDIO_API_KEY", "lm-studio"))
+CHAT_MODEL = os.getenv("CHAT_MODEL", os.getenv("LMSTUDIO_CHAT_MODEL", "qwen2.5-coder-3b-instruct-mlx"))
+EMBED_MODEL = os.getenv("EMBED_MODEL", os.getenv("LMSTUDIO_EMBED_MODEL", "text-embedding-nomic-embed-text-v1.5"))
 API_TOKEN = os.getenv("CHATBOT_API_TOKEN", "")
-ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN", "https://lyeswanthp.github.io")
+ALLOWED_ORIGINS_RAW = os.getenv("ALLOWED_ORIGINS", os.getenv("ALLOWED_ORIGIN", "https://lyeswanthp.github.io"))
 N_RESULTS = int(os.getenv("N_RESULTS", "3"))
+MAX_INPUT_CHARS = int(os.getenv("MAX_INPUT_CHARS", "600"))
+
+
+def _parse_origins(raw: str) -> list[str]:
+    origins = [origin.strip() for origin in raw.split(",") if origin.strip()]
+    return origins or ["https://lyeswanthp.github.io"]
+
+
+ALLOWED_ORIGINS = _parse_origins(ALLOWED_ORIGINS_RAW)
 
 app = FastAPI(title="Local Profile RAG API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[ALLOWED_ORIGIN, "http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=ALLOWED_ORIGINS + ["http://localhost:5173", "http://127.0.0.1:5173"],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-openai_client = OpenAI(base_url=LMSTUDIO_BASE_URL, api_key="lm-studio")
+openai_client = OpenAI(base_url=MODEL_BASE_URL, api_key=MODEL_API_KEY)
 
 _documents: list[dict[str, Any]] = []
 
@@ -109,6 +119,11 @@ def chat(
     question = payload.question.strip()
     if not question:
         raise HTTPException(status_code=400, detail="Question is required")
+    if len(question) > MAX_INPUT_CHARS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Question is too long. Limit is {MAX_INPUT_CHARS} characters.",
+        )
 
     chunks, _ = _retrieve(question)
 
