@@ -35,9 +35,6 @@ jobs:
 
       - name: Build
         working-directory: ./portfolio-new
-        env:
-          VITE_CHATBOT_API_URL: ${{ secrets.VITE_CHATBOT_API_URL }}
-          VITE_CHATBOT_TOKEN: ${{ secrets.VITE_CHATBOT_TOKEN }}
         run: npm run build
 
       - name: Upload artifact

@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
 import Navigation from './components/Navigation';
-import ProfileChatbot from './components/ProfileChatbot';
 
 // Lazy load sections for better performance
 const Hero = lazy(() => import('./components/sections/Hero'));
@@ -62,7 +61,6 @@ function App() {
           <Contact />
         </Suspense>
       </main>
-      <ProfileChatbot />
     </div>
   );
 }

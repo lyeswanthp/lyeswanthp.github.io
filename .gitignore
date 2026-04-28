@@ -16,9 +16,3 @@ vite.svg
 portfolio-new/dist/
 portfolio-new/dist-ssr/
 
-# Local chatbot backend artifacts
-profile-chatbot-api/.venv/
-profile-chatbot-api/.chroma/
-profile-chatbot-api/.pycache/
-profile-chatbot-api/__pycache__/
-profile-chatbot-api/*.log
