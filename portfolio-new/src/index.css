@@ -318,12 +318,17 @@ html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .chatbot-msg.streaming p::after {
-  content: '|';
+  content: "|";
   animation: blink 1s step-end infinite;
   margin-left: 1px;
 }

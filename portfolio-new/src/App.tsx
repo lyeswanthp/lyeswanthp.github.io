@@ -5,6 +5,7 @@ import ProfileChatbot from './components/ProfileChatbot';
 // Lazy load sections for better performance
 const Hero = lazy(() => import('./components/sections/Hero'));
 const About = lazy(() => import('./components/sections/About'));
+const Research = lazy(() => import('./components/sections/Research'));
 const Experience = lazy(() => import('./components/sections/Experience'));
 const Projects = lazy(() => import('./components/sections/Projects'));
 const Skills = lazy(() => import('./components/sections/Skills'));
@@ -39,6 +40,10 @@ function App() {
 
         <Suspense fallback={<SectionLoader />}>
           <About />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <Research />
         </Suspense>
 
         <Suspense fallback={<SectionLoader />}>
