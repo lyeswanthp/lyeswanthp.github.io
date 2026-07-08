@@ -3,14 +3,14 @@
 
 /* --- Warm editorial palette --- */
 :root {
-  --bg: #f8dfba;
-  --bg-card: rgba(255, 250, 240, 0.5);
+  --bg: #f0e8db;
+  --bg-card: rgba(255, 255, 255, 0.5);
   --text: #33261a;
   --text-soft: rgba(51, 38, 26, 0.72);
   --text-muted: rgba(51, 38, 26, 0.45);
   --line: rgba(51, 38, 26, 0.16);
   --accent: #7f5200;
-  --nav-bg: rgba(248, 223, 186, 0.88);
+  --nav-bg: rgba(240, 232, 219, 0.88);
 }
 
 html {
@@ -79,7 +79,7 @@ body {
   padding: 0.85rem 1.9rem;
   border-radius: 9999px;
   background: var(--text);
-  color: #f8dfba;
+  color: var(--bg);
   font-size: 0.9rem;
   font-weight: 500;
   transition: opacity 0.2s ease, transform 0.2s ease;
