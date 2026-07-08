@@ -14,14 +14,14 @@ function SectionLoader() {
   return (
     <div
       className="min-h-screen flex items-center justify-center"
-      style={{ backgroundColor: 'var(--bg-primary)' }}
+      style={{ backgroundColor: 'var(--bg)' }}
     >
       <div className="flex flex-col items-center gap-4">
         <div
           className="w-12 h-12 border-2 rounded-full animate-spin"
-          style={{ borderColor: 'var(--accent-cyan-soft)', borderTopColor: 'var(--accent-cyan)' }}
+          style={{ borderColor: 'var(--line)', borderTopColor: 'var(--accent)' }}
         />
-        <p className="font-mono-tech text-[11px] tracking-[0.22em] uppercase" style={{ color: 'var(--text-secondary)' }}>
+        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
           Loading…
         </p>
       </div>
