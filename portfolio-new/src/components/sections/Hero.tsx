@@ -44,8 +44,8 @@ const Hero: React.FC = () => {
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 mb-20">
-            <a href="#cardiofm" className="btn-solid">
-              See CardioFM
+            <a href="#research" className="btn-solid">
+              See my research
             </a>
             <a href="#contact" className="btn-outline">
               Get in touch
