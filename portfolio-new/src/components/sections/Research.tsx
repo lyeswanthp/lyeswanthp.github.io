@@ -31,6 +31,38 @@ const Research: React.FC = () => {
           </h2>
         </motion.div>
 
+        {/* Current focus — full width, prominent */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={fadeUp}
+          className="card p-8 mb-6"
+        >
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="font-serif-display text-2xl font-medium">
+              Current focus
+            </h3>
+            <span
+              className="text-xs px-3 py-1 rounded-full border"
+              style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}
+            >
+              In progress
+            </span>
+          </div>
+          <p className="text-base leading-relaxed max-w-3xl" style={{ color: 'var(--text-soft)' }}>
+            A next-generation ECG foundation model that pretrains a single
+            encoder under three self-supervised objectives at once: a
+            joint-embedding predictive objective (JEPA) with an EMA teacher,
+            contrastive alignment between 12-lead ECGs and their clinical text
+            reports, and masked waveform reconstruction. A cross-pattern
+            attention scheme lets each token attend along its own lead and its
+            timepoint, encoding the structure of the 12-lead signal directly.
+            The aim is representations that stay diagnostic while remaining
+            grounded in the raw waveform.
+          </p>
+        </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -38,7 +70,7 @@ const Research: React.FC = () => {
           variants={stagger}
           className="grid lg:grid-cols-[1.5fr_1fr] gap-6"
         >
-          {/* Flagship: CardioFM */}
+          {/* CardioFM — deployed */}
           <motion.div id="cardiofm" variants={fadeUp} className="card p-8 scroll-mt-28">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-serif-display text-2xl font-medium">CardioFM</h3>
