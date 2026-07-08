@@ -3,7 +3,6 @@ import Navigation from './components/Navigation';
 
 // Lazy load sections for better performance
 const Hero = lazy(() => import('./components/sections/Hero'));
-const About = lazy(() => import('./components/sections/About'));
 const Research = lazy(() => import('./components/sections/Research'));
 const Experience = lazy(() => import('./components/sections/Experience'));
 const Projects = lazy(() => import('./components/sections/Projects'));
@@ -37,10 +36,6 @@ function App() {
       <main id="home">
         <Suspense fallback={<SectionLoader />}>
           <Hero />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <About />
         </Suspense>
 
         <Suspense fallback={<SectionLoader />}>
