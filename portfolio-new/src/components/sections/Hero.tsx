@@ -9,10 +9,9 @@ const fadeUp = {
 };
 
 const stats = [
-  { value: '17+', label: 'Publications' },
+  { value: '10+', label: 'Projects' },
   { value: 'ISCE 2026', label: 'Best Paper' },
-  { value: '0.87', label: 'AUROC · OMI detection' },
-  { value: '1M+', label: 'Signals · CardioFM' },
+  { value: '17+', label: 'Publications' },
 ];
 
 const Hero: React.FC = () => {
@@ -63,7 +62,7 @@ const Hero: React.FC = () => {
 
           <motion.div
             variants={fadeUp}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t"
+            className="grid grid-cols-3 gap-8 pt-8 border-t"
             style={{ borderColor: 'var(--line)' }}
           >
             {stats.map((s, i) => (
