@@ -23,118 +23,140 @@ const fadeUp = {
   },
 };
 
+const metrics = [
+  { value: '0.87', label: 'AUROC · OMI DETECTION', color: 'var(--accent-cyan)' },
+  { value: '1M+', label: 'TRAINING SIGNALS', color: 'var(--accent-violet)' },
+  { value: '2', label: 'HOSPITAL SYSTEMS', color: 'var(--accent-gold)' },
+];
+
 const Research: React.FC = () => {
   return (
     <section
       id="research"
-      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
+      className="relative py-28 px-6 md:px-12 overflow-hidden"
+      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
     >
-      {/* Dot grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'radial-gradient(rgba(184,134,11,0.4) 1px, transparent 1px)',
-          backgroundSize: '30px 30px',
-        }}
-      />
+      {/* Cyber grid */}
+      <div className="absolute inset-0 cyber-grid pointer-events-none" />
 
       {/* Radial glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 50%, rgba(184,134,11,0.15) 0%, transparent 70%)',
+            'radial-gradient(ellipse at 50% 50%, rgba(110, 231, 255, 0.07) 0%, rgba(167, 139, 250, 0.04) 45%, transparent 70%)',
         }}
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section Heading */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={fadeUp}
+          className="mb-14"
+        >
+          <span className="section-rule mb-4">// 02 — Research</span>
+          <h2
+            className="font-display text-4xl md:text-5xl font-light mt-3"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Research that leaves the <span className="neon-cyan">lab</span>.
+          </h2>
+        </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={stagger}
-          className="text-center"
+          className="grid lg:grid-cols-[1.5fr_1fr] gap-6"
         >
-          {/* In Progress Badge */}
-          <motion.div variants={fadeUp} className="mb-8">
-            <span
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border"
-              style={{
-                backgroundColor: 'rgba(184,134,11,0.1)',
-                borderColor: 'rgba(184,134,11,0.3)',
-                color: '#B8860B',
-              }}
-            >
-              <span
-                className="w-2 h-2 rounded-full animate-pulse"
-                style={{ backgroundColor: '#B8860B' }}
-              />
-              In Progress
-            </span>
-          </motion.div>
+          {/* Flagship — CardioFM */}
+          <motion.div
+            id="cardiofm"
+            variants={fadeUp}
+            className="glass bracket-frame relative p-8 scroll-mt-28"
+          >
+            <span className="br-tl" />
+            <span className="br-br" />
 
-          {/* Section Heading */}
-          <motion.div variants={fadeUp} className="mb-6">
-            <div className="flex items-center justify-center gap-4 mb-2">
-              <div
-                className="w-12 h-[3px] rounded-full"
-                style={{ backgroundColor: '#B8860B' }}
-              />
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
-                Research
-              </h2>
-              <div
-                className="w-12 h-[3px] rounded-full"
-                style={{ backgroundColor: '#B8860B' }}
-              />
+            <div className="flex items-center justify-between mb-6 font-mono-tech text-[10px] tracking-[0.22em] text-white/40">
+              <span>// FLAGSHIP</span>
+              <span
+                className="inline-flex items-center gap-2 px-3 py-1 border"
+                style={{
+                  borderColor: 'var(--accent-cyan-soft)',
+                  color: 'var(--accent-cyan)',
+                  background: 'rgba(110, 231, 255, 0.05)',
+                }}
+              >
+                <span className="status-dot" />
+                ISCE 2026
+              </span>
+            </div>
+
+            <h3
+              className="font-display text-3xl font-medium mb-4"
+              style={{ color: 'var(--accent-cyan)', textShadow: '0 0 18px rgba(110, 231, 255, 0.2)' }}
+            >
+              CardioFM
+            </h3>
+            <p className="text-sm leading-relaxed mb-8 max-w-xl" style={{ color: 'var(--text-secondary)' }}>
+              A multimodal foundation model for ECG, trained on over a million medical
+              signals and paired clinical text. Accepted at ISCE 2026 and deployed in
+              ambulances for real-time OMI detection across Grady Memorial and Rochester
+              hospital systems.
+            </p>
+
+            <div className="grid grid-cols-3 gap-4">
+              {metrics.map((m, i) => (
+                <div key={i} className="border-l pl-4" style={{ borderColor: 'var(--border-primary)' }}>
+                  <div
+                    className="font-display text-2xl md:text-3xl font-light"
+                    style={{ color: m.color, textShadow: `0 0 16px ${m.color === 'var(--accent-cyan)' ? 'rgba(110,231,255,0.25)' : 'transparent'}` }}
+                  >
+                    {m.value}
+                  </div>
+                  <div className="font-mono-tech text-[9px] tracking-[0.18em] mt-1 text-white/35">
+                    {m.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Heading */}
-          <motion.h3
-            variants={fadeUp}
-            className="text-2xl md:text-3xl font-bold text-white mb-4"
-          >
-            Building AI That Matters
-          </motion.h3>
+          {/* Publications panel */}
+          <motion.div variants={fadeUp} className="glass relative p-8 flex flex-col">
+            <div className="font-mono-tech text-[10px] tracking-[0.22em] text-white/40 mb-6">
+              // PUBLICATIONS
+            </div>
 
-          {/* Subheading */}
-          <motion.p
-            variants={fadeUp}
-            className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto"
-          >
-            17+ publications spanning healthcare AI, multimodal models, and foundation models for biomedical signals.
-          </motion.p>
+            <div
+              className="font-display text-6xl font-light mb-2"
+              style={{ color: 'var(--accent-violet)', textShadow: '0 0 18px rgba(167, 139, 250, 0.25)' }}
+            >
+              17+
+            </div>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+              Peer-reviewed work spanning healthcare AI, multimodal models, and
+              foundation models for biomedical signals — including the OCIT 2024
+              Best Paper award.
+            </p>
 
-          {/* CTA Button */}
-          <motion.div variants={fadeUp}>
             <a
               href="https://github.com/lyeswanthp"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold transition-all duration-300 border hover:scale-105"
+              className="btn-sweep mt-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono-tech text-[11px] tracking-[0.22em] uppercase"
               style={{
-                backgroundColor: 'transparent',
-                borderColor: '#B8860B',
-                color: '#B8860B',
+                border: '1px solid var(--accent-violet)',
+                color: 'var(--accent-violet)',
+                background: 'rgba(167, 139, 250, 0.06)',
               }}
             >
-              View Publications
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
+              View Publications ↗
             </a>
           </motion.div>
         </motion.div>

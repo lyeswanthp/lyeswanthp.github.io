@@ -30,76 +30,78 @@ interface ExperienceItem {
   location: string;
   accent: string;
   highlights: string[];
-  bullets?: string[];
+  stack: string[];
 }
 
-const ExperienceItem: React.FC<{ item: ExperienceItem }> = ({ item }) => {
+const ExperienceItem: React.FC<{ item: ExperienceItem; index: number }> = ({ item, index }) => {
   return (
-    <motion.div
-      variants={fadeUp}
-      className="relative pl-8 pb-12 last:pb-0"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
-    >
+    <motion.div variants={fadeUp} className="relative pl-8 pb-12 last:pb-0">
       {/* Timeline line */}
       <div
-        className="absolute left-[7px] top-2 bottom-0 w-[2px]"
-        style={{ backgroundColor: `${item.accent}40` }}
+        className="absolute left-[7px] top-2 bottom-0 w-px"
+        style={{ background: `linear-gradient(180deg, ${item.accent}66, transparent)` }}
       />
 
-      {/* Timeline dot */}
+      {/* Timeline node */}
       <div
-        className="absolute left-0 top-1 w-4 h-4 rounded-full border-4 border-[#0d0b09]"
-        style={{ backgroundColor: item.accent }}
+        className="absolute left-0 top-1.5 w-[15px] h-[15px] border"
+        style={{
+          borderColor: item.accent,
+          background: 'var(--bg-primary)',
+          boxShadow: `0 0 12px ${item.accent}55`,
+          transform: 'rotate(45deg)',
+        }}
       />
 
       {/* Content */}
-      <div
-        className="p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm"
-      >
+      <div className="glass bracket-frame relative p-7">
+        <span className="br-tl" />
+        <span className="br-br" />
+
         {/* Header */}
-        <div className="mb-4">
-          <h3
-            className="text-xl font-semibold mb-1"
-            style={{ color: item.accent }}
-          >
-            {item.role}
-          </h3>
-          <div className="flex flex-wrap items-center gap-2 text-gray-300 text-sm">
-            <span className="font-medium">{item.company}</span>
-            <span className="text-gray-600">|</span>
+        <div className="mb-5">
+          <div className="flex items-center justify-between gap-4 mb-2">
+            <h3
+              className="font-display text-xl md:text-2xl font-medium"
+              style={{ color: item.accent, textShadow: `0 0 18px ${item.accent}33` }}
+            >
+              {item.role}
+            </h3>
+            <span className="font-mono-tech text-[10px] tracking-[0.24em] text-white/30 hidden sm:block">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 font-mono-tech text-[11px] tracking-[0.12em]" style={{ color: 'var(--text-secondary)' }}>
+            <span style={{ color: 'var(--text-primary)' }}>{item.company}</span>
+            <span className="text-white/20">·</span>
             <span>{item.period}</span>
-            <span className="text-gray-600">|</span>
+            <span className="text-white/20">·</span>
             <span>{item.location}</span>
           </div>
         </div>
 
         {/* Highlights */}
-        <ul className="space-y-2">
+        <ul className="space-y-2.5 mb-5">
           {item.highlights.map((highlight, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-gray-300 text-sm">
-              <div
-                className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
-                style={{ backgroundColor: item.accent }}
-              />
+            <li key={idx} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              <span className="mt-[7px] w-1.5 h-1.5 flex-shrink-0" style={{ backgroundColor: item.accent, transform: 'rotate(45deg)' }} />
               <span>{highlight}</span>
             </li>
           ))}
         </ul>
 
-        {/* Bullet points if present */}
-        {item.bullets && item.bullets.length > 0 && (
-          <ul className="mt-4 space-y-2">
-            {item.bullets.map((bullet, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-gray-400 text-sm">
-                <div
-                  className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
-                  style={{ backgroundColor: '#4a4a4a' }}
-                />
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+        {/* Stack tags */}
+        <div className="flex flex-wrap gap-2 pt-4 border-t" style={{ borderColor: 'var(--border-primary)' }}>
+          {item.stack.map((tech, idx) => (
+            <span
+              key={idx}
+              className="px-2.5 py-1 font-mono-tech text-[10px] tracking-[0.14em] uppercase border"
+              style={{ borderColor: 'var(--border-primary)', color: 'var(--text-secondary)' }}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
@@ -109,87 +111,74 @@ const Experience: React.FC = () => {
   const experiences: ExperienceItem[] = [
     {
       role: 'HPC & Cloud Research Engineer',
-      company: 'Emory University - Research Computing',
-      period: 'Aug 2024 - Present',
+      company: 'Emory University — Research Computing',
+      period: 'Aug 2024 – Present',
       location: 'Atlanta, GA',
-      accent: '#B8860B',
+      accent: '#6ee7ff',
       highlights: [
-        'Building a multimodal foundation model that combines ECG signals with clinical text for diagnostic applications, achieving state-of-the-art performance on downstream tasks',
-        'Built a GPU monitoring system using Python and NVIDIA DCGM to track utilization metrics across compute nodes, streaming data to Prometheus for real-time visualization in Grafana dashboards',
-        'Architected GPU monitoring on Emory\'s HyPER C3 cluster from scratch. Flags misallocated jobs, automates user lifecycle, saving thousands in compute costs.',
-        'Designed testing pipelines for AWS ParallelCluster architecture upgrades, ensuring compute nodes maintain functionality, correct user permissions, and compatibility with ML workloads',
-        'Created alerting systems for underutilized GPU resources, helping optimize costs on high-performance compute instances',
-        'Engineering and maintaining high-performance computing infrastructure that supports AI/ML research across the university.',
+        'Building a multimodal foundation model combining ECG signals with clinical text for diagnostic applications, achieving state-of-the-art performance on downstream tasks',
+        "Architected GPU monitoring for Emory's HyPER C3 cluster from scratch with Python and NVIDIA DCGM, streaming utilization metrics to Prometheus and Grafana — flags misallocated jobs and saves thousands in compute costs",
+        'Automated user lifecycle management through SLURM accounting database integration',
+        'Designed testing pipelines for AWS ParallelCluster upgrades, verifying compute-node functionality, user permissions, and ML workload compatibility',
+        'Built distributed ML training pipelines on AWS and GCP, and a RAG system for biomedical document understanding',
       ],
-      bullets: [
-        'Automated user lifecycle management via SLURM accounting database integration',
-        'Built ML training pipelines on AWS and GCP with distributed data processing',
-        'Collaborated with medical professionals to align models with clinical workflows',
-        'Conducted research in multimodal AI systems and foundation models for biomedical signals',
-        'Developed a RAG system for biomedical document understanding using PyTorch and LangChain',
-      ],
+      stack: ['Python', 'PyTorch', 'Slurm', 'NVIDIA DCGM', 'Prometheus', 'Grafana', 'AWS', 'GCP'],
     },
     {
       role: 'ML Research Assistant',
       company: 'MAIX Lab, Emory University',
-      period: 'May 2024 - Present',
+      period: 'May 2024 – Present',
       location: 'Atlanta, GA',
-      accent: '#6B8E23',
+      accent: '#a78bfa',
       highlights: [
-        'Published research on biomedical question answering and ECG/PPG signal processing in peer-reviewed conferences',
-        'Conducted research in computer vision and deep learning for medical imaging applications.',
+        'Published peer-reviewed research on biomedical question answering and ECG/PPG signal processing',
         'Developed CNN-based models for automated disease detection from medical scans',
-        'Contributed to open-source medical imaging datasets to support the research community',
+        'Contributed open-source medical imaging datasets to the research community',
       ],
+      stack: ['PyTorch', 'Computer Vision', 'ECG/PPG', 'Deep Learning'],
     },
     {
       role: 'Machine Learning Researcher',
       company: 'University of Winnipeg',
-      period: 'Jul 2023 - Oct 2023',
+      period: 'Jul 2023 – Oct 2023',
       location: 'Winnipeg, Canada',
-      accent: '#708090',
+      accent: '#f5c563',
       highlights: [
-        'Published research papers in medical AI focusing on diagnostic imaging and disease classification',
-        'Collaborated with medical professionals to ensure models aligned with clinical workflows and diagnostic standards',
+        'Published research in medical AI focused on diagnostic imaging and disease classification',
+        'Collaborated with medical professionals to align models with clinical workflows and diagnostic standards',
       ],
+      stack: ['TensorFlow', 'Medical Imaging', 'Classification'],
     },
     {
       role: 'Prompt Engineer',
       company: 'Insignia Consultancy',
-      period: 'Jan 2023 - Jul 2023',
+      period: 'Jan 2023 – Jul 2023',
       location: 'Remote',
-      accent: '#CD853F',
+      accent: '#ff7ad9',
       highlights: [
-        'Engineered prompt templates for GPT-4 and Claude to improve response quality and consistency across customer-facing applications',
-        'Designed and optimized prompts for large language models in production environments.',
-        'Developed testing frameworks to evaluate prompt performance and identify edge cases in LLM behavior',
-        'Worked with product teams to refine model outputs based on user feedback and business requirements',
+        'Engineered prompt templates for GPT-4 and Claude, improving response quality and consistency in customer-facing applications',
+        'Built testing frameworks to evaluate prompt performance and surface edge cases in LLM behavior',
+        'Refined model outputs with product teams based on user feedback and business requirements',
       ],
+      stack: ['LLMs', 'Prompt Engineering', 'Evaluation'],
     },
   ];
 
   return (
     <section
       id="experience"
-      className="relative py-20 px-6 md:px-12 bg-[#0d0b09]"
-      style={{ fontFamily: "'DM Sans', sans-serif" }}
+      className="relative py-28 px-6 md:px-12 overflow-hidden"
+      style={{ fontFamily: "'Space Grotesk', sans-serif" }}
     >
-      {/* Dot grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
+      {/* Cyber grid */}
+      <div className="absolute inset-0 cyber-grid pointer-events-none" />
 
       {/* Radial glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full pointer-events-none"
         style={{
           background:
-            'radial-gradient(circle, rgba(184,134,11,0.08) 0%, transparent 70%)',
+            'radial-gradient(circle, rgba(167, 139, 250, 0.05) 0%, rgba(110, 231, 255, 0.04) 40%, transparent 70%)',
         }}
       />
 
@@ -200,17 +189,15 @@ const Experience: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeUp}
-          className="mb-16"
+          className="mb-14"
         >
-          <div className="flex items-center gap-4 mb-2">
-            <div
-              className="w-12 h-[3px] rounded-full"
-              style={{ backgroundColor: '#B8860B' }}
-            />
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              Experience
-            </h2>
-          </div>
+          <span className="section-rule mb-4">// 03 — Experience</span>
+          <h2
+            className="font-display text-4xl md:text-5xl font-light mt-3"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Where the work <span className="neon-violet">happened</span>.
+          </h2>
         </motion.div>
 
         {/* Timeline */}
@@ -221,7 +208,7 @@ const Experience: React.FC = () => {
           variants={stagger}
         >
           {experiences.map((experience, index) => (
-            <ExperienceItem key={index} item={experience} />
+            <ExperienceItem key={index} item={experience} index={index} />
           ))}
         </motion.div>
       </div>

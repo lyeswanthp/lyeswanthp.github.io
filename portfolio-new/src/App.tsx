@@ -7,7 +7,6 @@ const About = lazy(() => import('./components/sections/About'));
 const Research = lazy(() => import('./components/sections/Research'));
 const Experience = lazy(() => import('./components/sections/Experience'));
 const Projects = lazy(() => import('./components/sections/Projects'));
-const Skills = lazy(() => import('./components/sections/Skills'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
 // Loading component
@@ -18,9 +17,12 @@ function SectionLoader() {
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 border-2 border-[#B8860B]/30 border-t-[#B8860B] rounded-full animate-spin" />
-        <p className="text-sm" style={{ fontFamily: "'DM Sans', sans-serif", color: 'var(--text-secondary)' }}>
-          Loading...
+        <div
+          className="w-12 h-12 border-2 rounded-full animate-spin"
+          style={{ borderColor: 'var(--accent-cyan-soft)', borderTopColor: 'var(--accent-cyan)' }}
+        />
+        <p className="font-mono-tech text-[11px] tracking-[0.22em] uppercase" style={{ color: 'var(--text-secondary)' }}>
+          Loading…
         </p>
       </div>
     </div>
@@ -51,10 +53,6 @@ function App() {
 
         <Suspense fallback={<SectionLoader />}>
           <Projects />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <Skills />
         </Suspense>
 
         <Suspense fallback={<SectionLoader />}>
