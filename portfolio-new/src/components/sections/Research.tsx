@@ -38,7 +38,7 @@ const Research: React.FC = () => {
           variants={stagger}
           className="grid lg:grid-cols-[1.5fr_1fr] gap-6"
         >
-          {/* Flagship — CardioFM */}
+          {/* Flagship: CardioFM */}
           <motion.div id="cardiofm" variants={fadeUp} className="card p-8 scroll-mt-28">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-serif-display text-2xl font-medium">CardioFM</h3>
@@ -72,7 +72,7 @@ const Research: React.FC = () => {
             <div className="font-serif-display text-5xl font-medium mb-3">17+</div>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-soft)' }}>
               Peer-reviewed publications spanning healthcare AI, multimodal
-              models, and foundation models for biomedical signals — including
+              models, and foundation models for biomedical signals, including
               the OCIT 2024 Best Paper award.
             </p>
             <a

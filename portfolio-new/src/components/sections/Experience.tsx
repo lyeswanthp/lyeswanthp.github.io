@@ -20,12 +20,12 @@ interface ExperienceItem {
 const experiences: ExperienceItem[] = [
   {
     role: 'HPC & Cloud Research Engineer',
-    company: 'Emory University — Research Computing',
-    period: 'Aug 2024 – Present',
+    company: 'Emory University, Research Computing',
+    period: 'Aug 2024 to Present',
     location: 'Atlanta, GA',
     highlights: [
       'Building a multimodal foundation model combining ECG signals with clinical text for diagnostic applications, achieving state-of-the-art performance on downstream tasks',
-      "Architected GPU monitoring for Emory's HyPER C3 cluster from scratch with Python and NVIDIA DCGM, streaming utilization metrics to Prometheus and Grafana — flags misallocated jobs and saves thousands in compute costs",
+      "Architected GPU monitoring for Emory's HyPER C3 cluster from scratch with Python and NVIDIA DCGM, streaming utilization metrics to Prometheus and Grafana that flag misallocated jobs and save thousands in compute costs",
       'Automated user lifecycle management through SLURM accounting database integration',
       'Designed testing pipelines for AWS ParallelCluster upgrades, verifying compute-node functionality, user permissions, and ML workload compatibility',
       'Built distributed ML training pipelines on AWS and GCP, and a RAG system for biomedical document understanding',
@@ -35,7 +35,7 @@ const experiences: ExperienceItem[] = [
   {
     role: 'ML Research Assistant',
     company: 'MAIX Lab, Emory University',
-    period: 'May 2024 – Present',
+    period: 'May 2024 to Present',
     location: 'Atlanta, GA',
     highlights: [
       'Published peer-reviewed research on biomedical question answering and ECG/PPG signal processing',
@@ -47,7 +47,7 @@ const experiences: ExperienceItem[] = [
   {
     role: 'Machine Learning Researcher',
     company: 'University of Winnipeg',
-    period: 'Jul 2023 – Oct 2023',
+    period: 'Jul 2023 to Oct 2023',
     location: 'Winnipeg, Canada',
     highlights: [
       'Published research in medical AI focused on diagnostic imaging and disease classification',
@@ -58,7 +58,7 @@ const experiences: ExperienceItem[] = [
   {
     role: 'Prompt Engineer',
     company: 'Insignia Consultancy',
-    period: 'Jan 2023 – Jul 2023',
+    period: 'Jan 2023 to Jul 2023',
     location: 'Remote',
     highlights: [
       'Engineered prompt templates for GPT-4 and Claude, improving response quality and consistency in customer-facing applications',

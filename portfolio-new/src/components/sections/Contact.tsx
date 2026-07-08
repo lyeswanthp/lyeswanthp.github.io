@@ -25,7 +25,7 @@ const Contact: React.FC = () => {
             </h2>
             <p className="text-base leading-relaxed max-w-xl mx-auto mb-10" style={{ color: 'var(--text-soft)' }}>
               Open to opportunities, collaborations, and research conversations
-              in AI/ML — the fastest way to reach me is email.
+              in AI/ML. The fastest way to reach me is email.
             </p>
           </motion.div>
 

@@ -43,7 +43,7 @@ const About: React.FC = () => {
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed" style={{ color: 'var(--text-soft)' }}>
             My work spans healthcare AI, ECG/PPG signal processing, NLP,
-            computer vision, and fairness-aware ML — 17+ publications,
+            computer vision, and fairness-aware ML, with 17+ publications
             including the OCIT 2024 Best Paper.
           </p>
         </motion.div>

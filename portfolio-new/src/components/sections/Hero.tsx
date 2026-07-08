@@ -38,9 +38,10 @@ const Hero: React.FC = () => {
             className="text-lg md:text-xl leading-relaxed max-w-2xl mb-12"
             style={{ color: 'var(--text-soft)' }}
           >
-            Building AI that runs in the real world — from training foundation
-            models on million-scale medical signals to deploying them inside
-            ambulances.
+            Designing deep learning architectures for ECG and biomedical
+            waveforms, training multimodal foundation models on over a million
+            signals, and deploying them in ambulances for real-time heart
+            attack (OMI) detection.
           </motion.p>
 
           <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 mb-20">
