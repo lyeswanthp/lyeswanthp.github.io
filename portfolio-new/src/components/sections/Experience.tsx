@@ -19,18 +19,17 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
-    role: 'HPC & Cloud Research Engineer',
+    role: 'AWS & HPC Infrastructure Engineer',
     company: 'Emory University, Research Computing',
     period: 'Aug 2024 to Present',
     location: 'Atlanta, GA',
     highlights: [
-      'Building a multimodal foundation model combining ECG signals with clinical text for diagnostic applications, achieving state-of-the-art performance on downstream tasks',
-      "Architected GPU monitoring for Emory's HyPER C3 cluster from scratch with Python and NVIDIA DCGM, streaming utilization metrics to Prometheus and Grafana that flag misallocated jobs and save thousands in compute costs",
-      'Automated user lifecycle management through SLURM accounting database integration',
-      'Designed testing pipelines for AWS ParallelCluster upgrades, verifying compute-node functionality, user permissions, and ML workload compatibility',
-      'Built distributed ML training pipelines on AWS and GCP, and a RAG system for biomedical document understanding',
+      'Leadership had no single view of AWS account spend and usage, so I scripted collection of account-wide cost and usage metrics, queried them with Amazon Athena, and surfaced the results in a Power BI dashboard that makes spend legible at a glance',
+      'Power BI cloud cannot reach Athena and the refresh needed a person clicking a button, so I put an on-premises data gateway on an EC2 instance with an IAM instance profile and used Lambda and EventBridge to start the instance before each scheduled refresh and stop it after, making the whole dashboard update on its own',
+      'Researchers wanted RStudio and VS Code without learning the cluster, so I built and deployed containerized application images on the Open OnDemand platform so those tools launch in a browser as interactive HPC sessions',
+      'Onboarding and offboarding accounts was manual and error-prone, so I wrote automation against the SLURM accounting database to handle user lifecycle provisioning and cleanup without manual steps',
     ],
-    stack: ['Python', 'PyTorch', 'Slurm', 'NVIDIA DCGM', 'Prometheus', 'Grafana', 'AWS', 'GCP'],
+    stack: ['AWS', 'Athena', 'Power BI', 'Lambda', 'EventBridge', 'EC2', 'Open OnDemand', 'Slurm', 'Python'],
   },
   {
     role: 'ML Research Assistant',
