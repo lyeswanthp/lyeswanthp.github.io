@@ -48,7 +48,7 @@ const Contact: React.FC = () => {
               GitHub ↗
             </a>
             <a
-              href="https://drive.google.com/file/d/1v8EoGp7CwuMjfkC0qoE7uoC6Jz8g6P9R/view"
+              href="https://drive.google.com/file/d/1hGo55m7nZhrow5VOIGiHC9dxIMdRmotw/view"
               target="_blank"
               rel="noopener noreferrer"
               className="link-plain"
