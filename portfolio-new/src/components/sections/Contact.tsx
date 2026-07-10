@@ -48,9 +48,9 @@ const Contact: React.FC = () => {
               GitHub ↗
             </a>
             <a
-              href="https://drive.google.com/file/d/1hGo55m7nZhrow5VOIGiHC9dxIMdRmotw/view"
+              href="https://drive.google.com/file/d/1hGo55m7nZhrow5VOIGiHC9dxIMdRmotw/view?usp=sharing"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="link-plain"
             >
               Resume ↗
