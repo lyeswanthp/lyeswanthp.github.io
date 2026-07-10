@@ -53,28 +53,28 @@ const experiences: ExperienceItem[] = [
     stack: ['AWS', 'Athena', 'Power BI', 'Lambda', 'EventBridge', 'EC2', 'IAM', 'Open OnDemand', 'Slurm', 'Python'],
   },
   {
-    role: 'ML Research Assistant',
+    role: 'ML Researcher',
     company: 'MAIX Lab, Emory University',
     period: 'May 2024 to Present',
     location: 'Atlanta, GA',
     highlights: [
       {
-        lead: 'Biomedical QA and signal research',
+        lead: 'CardioFM foundation model',
         detail:
-          'Published peer-reviewed work on biomedical question answering and ECG/PPG signal processing, from problem framing through model design and evaluation.',
+          'Pretrained a self-supervised 12-lead ECG encoder on MIMIC-IV-ECG that learns from two objectives at once: masked reconstruction of the raw waveform for morphology, and CLIP-style contrastive alignment between each ECG and its clinical text report for diagnostic separation.',
       },
       {
-        lead: 'Diagnostic imaging models',
+        lead: 'Diagnosed a counterintuitive result',
         detail:
-          'Developed CNN-based models for automated disease detection from medical scans, tuning architectures and training regimes for reliable performance on clinical data.',
+          'Our strongest downstream checkpoint looked like the weakest by its retrieval metric, so I traced per-task gradient norms and showed the contrastive objective was shaping the shared encoder through its gradient rather than its retrieval head, which redirected the next phase of the model design.',
       },
       {
-        lead: 'Open datasets',
+        lead: 'Training stability and publications',
         detail:
-          'Contributed open-source medical imaging datasets to the research community to support reproducible benchmarking.',
+          'Replaced fragile uncertainty-weighted loss balancing, which was collapsing the representation mid-training, with fixed weighting for stable convergence. Published 4 peer-reviewed papers out of the lab across ECG modeling and biomedical AI.',
       },
     ],
-    stack: ['PyTorch', 'Computer Vision', 'ECG/PPG', 'Deep Learning'],
+    stack: ['PyTorch', 'Self-Supervised Learning', 'ECG', 'Foundation Models', 'CLIP'],
   },
   {
     role: 'Machine Learning Researcher',
