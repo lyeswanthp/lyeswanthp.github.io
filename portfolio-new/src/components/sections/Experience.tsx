@@ -30,24 +30,14 @@ const experiences: ExperienceItem[] = [
     location: 'Atlanta, GA',
     highlights: [
       {
-        lead: 'AWS cost intelligence pipeline',
+        lead: 'Self-refreshing AWS cost dashboard',
         detail:
-          'Leadership lacked a unified view of account spend, so I scripted extraction of account-wide cost and usage data and modeled it with Amazon Athena SQL, turning raw billing exports into a queryable layer for reporting.',
+          'Built an end-to-end reporting pipeline that queries account-wide cost and usage data with Amazon Athena and visualizes it in Power BI. Since Power BI Service cannot reach Athena directly, I bridged it through an on-premises data gateway on EC2 authenticated by an IAM instance profile, then used Lambda and EventBridge to start the host only around each scheduled refresh.',
       },
       {
-        lead: 'Executive Power BI dashboard',
+        lead: 'Compute Optimizer triage tooling',
         detail:
-          'Bridged Athena to Power BI through an on-premises data gateway on EC2, exposing cost-per-service, utilization, and trend views that make where the money goes legible to non-engineers at a glance.',
-      },
-      {
-        lead: 'Zero-touch refresh automation',
-        detail:
-          'Power BI Service cannot reach Athena directly, so I authenticated the ODBC driver with an IAM instance profile and ran the gateway as an auto-recovering Windows service, then used Lambda and EventBridge to start the EC2 host before each scheduled refresh and stop it after, cutting idle compute cost to near zero.',
-      },
-      {
-        lead: 'SharePoint delivery',
-        detail:
-          'Published the dataset from Power BI Desktop to the Service and embedded the live dashboard natively into SharePoint, so stakeholders read always-current numbers without touching AWS or Power BI.',
+          'Wrote multi-account Bash and AWS CLI tooling that takes resources flagged by AWS Compute Optimizer and enriches each one with the context needed for a keep-or-remove call: attachment state, existing snapshots, owner tags, and 14-day CloudWatch I/O that classifies EBS volumes as idle, low, or active across EBS, RDS, ElastiCache, and DynamoDB.',
       },
       {
         lead: 'Interactive HPC apps on Open OnDemand',
